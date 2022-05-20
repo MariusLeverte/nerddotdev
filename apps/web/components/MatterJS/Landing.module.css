@@ -1,0 +1,58 @@
+.matter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  contain: strict;
+  background-color: bisque;
+  user-select: none;
+  z-index: 1;
+}
+
+.matter canvas {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  transform: translateX(-50%);
+  background-color: transparent;
+  opacity: 0;
+}
+
+.chip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+}
+
+.chip span {
+  --rotate: 90rad;
+
+  cursor: grab;
+  display: inline-block;
+  padding: 14px 24px;
+  background-color: red;
+  border-radius: 25px;
+  transform: translate(-50%, -50%) rotate(var(--rotate));
+  font-weight: 600;
+  font-size: large;
+}
+
+.green span {
+  background-color: #c9fec4;
+}
+.lightGreen span {
+  background-color: #dbefe8;
+}
+.yellow span {
+  background-color: #fffac0;
+}
+.grey span {
+  background-color: #eaeaea;
+}
+.purple span {
+  background-color: #d8c0ff;
+}
