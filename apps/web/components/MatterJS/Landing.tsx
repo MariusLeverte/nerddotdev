@@ -7,7 +7,6 @@ import {
   MouseConstraint,
   Mouse,
   Composite,
-  Sleeping,
   Body,
 } from "matter-js";
 import styles from "./Landing.module.css";
@@ -169,7 +168,7 @@ const Landing = () => {
         <span>Nice!!</span>
       </div>
       <div className={clsx(styles.chip, styles.purple)}>
-        <span>Uvirkelig</span>
+        <span>Uvirkelig 😱</span>
       </div>
       <div className={clsx(styles.chip, styles.green)}>
         <span>Muligheter!</span>
