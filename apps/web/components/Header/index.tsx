@@ -1,12 +1,14 @@
-import { Card, Container, Text } from "@nextui-org/react";
-import Image from "next/image";
+import { Container, Text } from "@nextui-org/react";
 import Link from "next/link";
+import ProfilePicture from "./ProfilePicture";
 
 const Header = () => {
   return (
     <Container
       as="header"
       css={{ top: 60, position: "fixed", left: 0, right: 0, zIndex: 99 }}
+      display="flex"
+      alignItems="center"
     >
       <Link href="/" passHref>
         <Text
@@ -14,6 +16,7 @@ const Header = () => {
           weight="bold"
           size={20}
           css={{
+            flex: 1,
             "@md": {
               fontSize: 40,
             },
@@ -35,6 +38,7 @@ const Header = () => {
           dev
         </Text>
       </Link>
+      <ProfilePicture />
     </Container>
   );
 };

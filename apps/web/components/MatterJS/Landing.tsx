@@ -14,8 +14,7 @@ import styles from "./Landing.module.css";
 import clsx from "clsx";
 
 const Landing = () => {
-  const scene = useRef();
-  const engine = useRef(Engine.create());
+  const scene = useRef<HTMLDivElement>();
 
   useEffect(() => {
     if (!scene.current) return;
@@ -50,7 +49,7 @@ const Landing = () => {
     function addObject(object) {
       const objWidth = object.scrollWidth;
       const objHeight = object.scrollHeight;
-      console.log({ placement, spacing });
+
       const rect = Bodies.rectangle(
         placement.x * spacing.y,
         placement.y * spacing.x,
@@ -64,16 +63,13 @@ const Landing = () => {
           friction: 0.001,
           chamfer: { radius: 25 },
           render: {
-            fillStyle: "green",
-            strokeStyle: "black",
-            strokeWidth: 1,
+            fillStyle: "transparent",
+            strokeStyle: "transparent",
           },
-        },
-        100
+        }
       );
 
       World.add(engine.world, rect);
-      Sleeping.update(rect, 50);
       const rotation = (Math.random() < 0.5 ? -1 : 1) * (Math.random() * 1);
       Body.rotate(rect, rotation);
       checkPlacement();
@@ -88,7 +84,7 @@ const Landing = () => {
       const allBodies = Composite.allBodies(engine.world);
 
       allBodies.forEach((body) => {
-        if (body.labe === "skip") return;
+        if (body.label === "skip") return;
         for (const child of scene.current.children) {
           if (child.innerText !== body.label) continue;
 
