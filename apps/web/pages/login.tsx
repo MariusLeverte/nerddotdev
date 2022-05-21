@@ -5,6 +5,7 @@ import Github from "../components/Auth/Github";
 import { auth } from "../libs/firebase/initFirebase";
 import { useRouter } from "next/router";
 import { USER_REDIRECT_URL } from "../contants";
+import Meta from "../components/SEO/Meta";
 
 const Login = () => {
   const router = useRouter();
@@ -20,27 +21,30 @@ const Login = () => {
     }
   }, [signInWithGithub, user, router]);
 
-  useEffect(() => {
-    if (githubLoading) return;
-    if (!githubUser) return;
+  // useEffect(() => {
+  //   if (githubLoading) return;
+  //   if (!githubUser) return;
 
-    router.push(USER_REDIRECT_URL);
-  }, [githubLoading, githubUser, router]);
+  //   router.push(USER_REDIRECT_URL);
+  // }, [githubLoading, githubUser, router]);
 
   return (
-    <Container
-      fluid
-      css={{ height: "100vh" }}
-      display="flex"
-      alignItems="center"
-    >
-      <Github
-        onAuth={handleAction}
-        photoUrl={user?.photoURL}
-        displayName={user?.displayName}
-        loading={loading}
-      />
-    </Container>
+    <>
+      <Meta noIndex />
+      <Container
+        fluid
+        css={{ height: "100vh" }}
+        display="flex"
+        alignItems="center"
+      >
+        <Github
+          onAuth={handleAction}
+          photoUrl={user?.photoURL}
+          displayName={user?.displayName}
+          loading={loading}
+        />
+      </Container>
+    </>
   );
 };
 
