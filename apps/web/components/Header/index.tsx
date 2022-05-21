@@ -9,6 +9,7 @@ const Header = () => {
       css={{ top: 60, position: "fixed", left: 0, right: 0, zIndex: 99 }}
       display="flex"
       alignItems="center"
+      justify="space-between"
     >
       <Link href="/" passHref>
         <Text
@@ -16,7 +17,7 @@ const Header = () => {
           weight="bold"
           size={20}
           css={{
-            flex: 1,
+            margin: 0,
             "@md": {
               fontSize: 40,
             },
