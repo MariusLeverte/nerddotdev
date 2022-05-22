@@ -15,6 +15,8 @@ interface UserProps {
 }
 
 const User = ({ user }: UserProps) => {
+  if (!user) return null;
+
   return (
     <>
       <Meta
