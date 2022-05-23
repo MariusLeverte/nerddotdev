@@ -9,6 +9,8 @@ import theme from "../nextUI/theme";
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
+    if (process.env.NEXT_PUBLIC_VERCEL_ENV !== "production") return;
+
     const analytics = getAnalytics(app);
     logEvent(analytics, "screen_view");
   }, []);
