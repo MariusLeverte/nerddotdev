@@ -4,7 +4,7 @@ import { useSignInWithGithub, useAuthState } from "react-firebase-hooks/auth";
 import Github from "../components/Auth/Github";
 import { auth } from "../libs/firebase/initFirebase";
 import { useRouter } from "next/router";
-import { USER_REDIRECT_URL } from "../contants";
+import { USER_REDIRECT_URL } from "../constants";
 import Meta from "../components/SEO/Meta";
 
 const Login = () => {
