@@ -4,7 +4,7 @@ module.exports = {
   siteUrl:
     process.env.NEXT_PUBLIC_VERCEL_ENV !== "production"
       ? process.env.NEXT_PUBLIC_VERCEL_URL || "localhost:3000"
-      : "nerd.dev",
+      : "https://nerd.dev",
   generateRobotsTxt: true,
   robotsTxtOptions: {
     policies: [
