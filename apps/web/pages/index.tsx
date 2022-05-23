@@ -1,6 +1,7 @@
 import { Container, Grid, Text } from "@nextui-org/react";
 import Landing from "../components/MatterJS/Landing";
 import Meta from "../components/SEO/Meta";
+import { getCanoniical } from "../utils/canonical";
 
 const Home = () => {
   return (
@@ -8,7 +9,7 @@ const Home = () => {
       <Meta
         title="Kanskje Norges kuleste utvikler miljø - Nerd.dev"
         description="Webutvikler miljø for de beste utviklerne i Norge av utviklere"
-        canonical={process.env.NEXT_PUBLIC_VERCEL_URL}
+        canonical={getCanoniical()}
         locale={{
           current: "nb_NO",
         }}
