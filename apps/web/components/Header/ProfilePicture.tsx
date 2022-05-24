@@ -11,7 +11,7 @@ const ProfilePicture = () => {
   };
 
   if (loading) return null;
-  if (!user) return;
+  if (!user) return null;
 
   return (
     <Popover>
