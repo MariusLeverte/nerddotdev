@@ -1,0 +1,25 @@
+.label {
+  display: block;
+  font-weight: var(--nextui-fontWeights-normal);
+  color: var(--nextui-colors-foreground);
+  padding: 0 0 0 var(--nextui-space-2);
+  margin-bottom: var(--nextui-space-3);
+  font-size: var(--nextui-fontSizes-xs);
+  line-height: var(--nextui-lineHeights-md);
+  user-select: none;
+}
+
+.select {
+  background-color: var(--nextui-colors-accents0);
+  border: none;
+  padding: var(--nextui-space-2) var(--nextui-space-5);
+  border-radius: var(--nextui-space-6);
+  height: calc(2 * var(--nextui-space-9));
+  display: inline-flex;
+}
+
+.select select {
+  width: 100%;
+  border: none;
+  background-color: transparent;
+}

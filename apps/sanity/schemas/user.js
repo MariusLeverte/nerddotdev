@@ -46,5 +46,32 @@ export default {
       type: "array",
       of: [{ type: "reference", to: { type: "skill" } }],
     },
+    {
+      name: "repos",
+      title: "Repos",
+      type: "array",
+      of: [
+        {
+          name: "repo",
+          type: "object",
+          fields: [
+            {
+              name: "name",
+              type: "string",
+            },
+            {
+              name: "html_url",
+              type: "url",
+            },
+            {
+              name: "description",
+              type: "text",
+            },
+            { name: "homepage", type: "url" },
+            { name: "language", type: "string" },
+          ],
+        },
+      ],
+    },
   ],
 };
