@@ -8,7 +8,9 @@
   "license": "UNLICENSED",
   "scripts": {
     "dev": "sanity start",
-    "build": "sanity build"
+    "prebuild": "codegen",
+    "build": "sanity build",
+    "codegen": "sanity-codegen"
   },
   "keywords": [
     "sanity"
