@@ -127,6 +127,51 @@ export interface User extends SanityDocument {
    *
    */
   skills?: Array<SanityKeyedReference<Skill>>;
+
+  /**
+   * Repos — `array`
+   *
+   *
+   */
+  repos?: Array<
+    SanityKeyed<{
+      _type: "repo";
+      /**
+       * name — `string`
+       *
+       *
+       */
+      name?: string;
+
+      /**
+       * html_url — `url`
+       *
+       *
+       */
+      html_url?: string;
+
+      /**
+       * description — `text`
+       *
+       *
+       */
+      description?: string;
+
+      /**
+       * homepage — `url`
+       *
+       *
+       */
+      homepage?: string;
+
+      /**
+       * language — `string`
+       *
+       *
+       */
+      language?: string;
+    }>
+  >;
 }
 
 /**

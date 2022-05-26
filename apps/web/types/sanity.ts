@@ -21,3 +21,9 @@ export type UserProject = Project & {
 export type UserWithProjects = User & {
   projects: UserProject[];
 };
+
+type ArrElement<ArrType> = ArrType extends readonly (infer ElementType)[]
+  ? ElementType
+  : never;
+
+export type Repo = ArrElement<User["repos"]>;
