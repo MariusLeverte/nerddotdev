@@ -13,10 +13,13 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../libs/firebase/initFirebase";
 import { RiEdit2Line } from "react-icons/ri";
 import { useState } from "react";
-import EditUserModal from "../../components/Modals/EditUserModal";
 import useEditUserProfile from "../../hooks/useEditUserProfile";
 import UserRepos from "../../components/Grids/UserRepos";
 import { revalidateMinutes } from "../../utils/revalidate";
+import dynamic from "next/dynamic";
+const EditUserModal = dynamic(
+  () => import("../../components/Modals/EditUserModal")
+);
 
 interface UserProps {
   user: UserWithProjects;
@@ -98,7 +101,7 @@ const User = ({ user }: UserProps) => {
           >
             <Button
               rounded
-              shadow
+              bordered
               color="gradient"
               onClick={() => setVisible(true)}
             >
