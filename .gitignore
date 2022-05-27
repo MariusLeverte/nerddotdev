@@ -34,5 +34,8 @@ robots.txt
 sitemap.xml
 sitemap-0.xml
 
+# sanity
+apps/sanity/dist/
+
 # turbo
 .turbo

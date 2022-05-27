@@ -16,6 +16,7 @@ import { useState } from "react";
 import EditUserModal from "../../components/Modals/EditUserModal";
 import useEditUserProfile from "../../hooks/useEditUserProfile";
 import UserRepos from "../../components/Grids/UserRepos";
+import { revalidateMinutes } from "../../utils/revalidate";
 
 interface UserProps {
   user: UserWithProjects;
@@ -25,8 +26,6 @@ const User = ({ user }: UserProps) => {
   const [visible, setVisible] = useState(false);
   const [firebaseUser] = useAuthState(auth);
   const { merged } = useEditUserProfile(user);
-
-  console.log({ user, merged });
 
   if (!user) {
     return null;
@@ -135,6 +134,7 @@ export const getStaticProps: GetStaticProps = async ({
 
   return {
     props: { user },
+    revalidate: revalidateMinutes(10),
   };
 };
 
