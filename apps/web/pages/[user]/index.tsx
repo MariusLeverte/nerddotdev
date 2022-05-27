@@ -28,13 +28,13 @@ const User = ({ user }: UserProps) => {
 
   console.log({ user, merged });
 
-  const data = merged || user;
-
-  const isCurrentUser = firebaseUser?.uid === user._id;
-
   if (!user) {
     return null;
   }
+
+  const data = merged || user;
+
+  const isCurrentUser = firebaseUser?.uid === user?._id;
 
   return (
     <>

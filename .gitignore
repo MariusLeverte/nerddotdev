@@ -29,5 +29,10 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
+# built files
+robots.txt
+sitemap.xml
+sitemap-0.xml
+
 # turbo
 .turbo

@@ -40,7 +40,7 @@ const GithubRepos = ({
       {data && (
         <Checkbox.Group
           isRow
-          label="Velg dine repoer"
+          label="Repoer"
           color="success"
           value={initialValue?.map((v) => v.name)}
           onChange={handleOnChange}
