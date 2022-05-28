@@ -20,8 +20,8 @@ const Landing = () => {
 
     const width = scene.current.clientWidth;
     const height = scene.current.clientHeight;
-    let placement = { x: 1, y: 1 };
-    let spacing = { x: 300, y: 300 };
+    let placement = { x: 20, y: 20 };
+    let spacing = { x: 20, y: 20 };
 
     const engine = Engine.create();
     //engine.world.gravity.y = 0.6;
@@ -37,41 +37,45 @@ const Landing = () => {
       },
     });
 
-    function checkPlacement() {
-      placement.x++;
-      if (placement.x * spacing.x > width - spacing.x) {
-        placement.y++;
-        placement.x = 1;
+    function getPlacement(x, y) {
+      placement.x = x + spacing.x;
+
+      if (placement.x > width - spacing.x) {
+        placement.y = y + spacing.y;
+        placement.x = 20;
       }
+      if (placement.y > height - spacing.y) {
+        placement.y = 20;
+      }
+
+      return { x: placement.x, y: placement.y };
     }
 
     function addObject(object) {
       const objWidth = object.scrollWidth;
       const objHeight = object.scrollHeight;
 
-      const rect = Bodies.rectangle(
-        placement.x * spacing.y,
-        placement.y * spacing.x,
-        objWidth,
-        objHeight,
-        {
-          label: object.innerText,
-          density: 0.8,
-          frictionAir: 0,
-          restitution: 0.5,
-          friction: 0.001,
-          chamfer: { radius: 25 },
-          render: {
-            fillStyle: "transparent",
-            strokeStyle: "transparent",
-          },
-        }
+      const { x, y } = getPlacement(
+        placement.x + objWidth,
+        placement.y + objHeight
       );
+
+      const rect = Bodies.rectangle(x, y, objWidth, objHeight, {
+        label: object.innerText,
+        density: 0.8,
+        frictionAir: 0,
+        restitution: 0.5,
+        friction: 0.001,
+        chamfer: { radius: 25 },
+        render: {
+          fillStyle: "transparent",
+          strokeStyle: "transparent",
+        },
+      });
 
       World.add(engine.world, rect);
       const rotation = (Math.random() < 0.5 ? -1 : 1) * (Math.random() * 1);
       Body.rotate(rect, rotation);
-      checkPlacement();
     }
 
     for (const child of scene.current.children) {
@@ -84,6 +88,7 @@ const Landing = () => {
 
       allBodies.forEach((body) => {
         if (body.label === "skip") return;
+        if (!scene.current) return;
         for (const child of scene.current.children) {
           if (child.innerText !== body.label) continue;
 

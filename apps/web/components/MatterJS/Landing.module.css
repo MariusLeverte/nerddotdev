@@ -34,17 +34,18 @@
   cursor: grab;
   display: inline-block;
 
-  padding: 8px 12px;
+  padding: 5px 10px;
   background-color: red;
   border-radius: 25px;
   transform: translate(-50%, -50%) rotate(var(--rotate));
   font-weight: 600;
-  font-size: large;
+  font-size: small;
 }
 
 @media (min-width: 1280px) {
   .chip span {
     padding: 14px 24px;
+    font-size: large;
   }
 }
 
