@@ -7,9 +7,10 @@ interface SelectProps {
   options: (string | undefined)[] | undefined;
   label: string;
   name: string;
+  value?: string;
 }
 
-const Select = ({ onChange, options, label, name }: SelectProps) => {
+const Select = ({ onChange, options, label, name, value }: SelectProps) => {
   return (
     <Container
       fluid
@@ -20,7 +21,7 @@ const Select = ({ onChange, options, label, name }: SelectProps) => {
         {label}
       </label>
       <div className={styles.select}>
-        <select name={name} onChange={onChange}>
+        <select name={name} onChange={onChange} value={value}>
           <option value="">Velg</option>
           {options?.map((option) => (
             <option key={option} value={option}>
