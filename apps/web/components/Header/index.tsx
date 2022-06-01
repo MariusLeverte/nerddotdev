@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <Container
       as="header"
-      css={{ top: 60, position: "fixed", left: 0, right: 0, zIndex: 9999 }}
+      css={{ top: 60, position: "sticky", left: 0, right: 0, zIndex: 9999 }}
       display="flex"
       alignItems="center"
       justify="space-between"

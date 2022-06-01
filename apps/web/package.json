@@ -35,7 +35,7 @@
     "@types/react": "17.0.37",
     "eslint": "7.32.0",
     "eslint-config-custom": "*",
-    "next-sitemap": "^2.5.24",
+    "next-sitemap": "^2.5.28",
     "next-transpile-modules": "9.0.0",
     "tsconfig": "*",
     "typescript": "^4.5.3"
