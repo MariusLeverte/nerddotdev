@@ -1,9 +1,8 @@
 import { Button, Input, Modal, Text } from "@nextui-org/react";
 import { useRouter } from "next/router";
 import { useCallback } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
 import useEditUserProfile from "../../hooks/useEditUserProfile";
-import { auth } from "../../libs/firebase/initFirebase";
+import { useFirebaseUser } from "../../libs/firebase/FirebaseAuthProvider";
 import { generateKey } from "../../utils/key";
 import GithubRepos from "../GithubRepos";
 import InputSkills from "../Skills/InputSkills";
@@ -20,7 +19,7 @@ interface EditUserModalProps {
 const EditUserModal = ({ visible, onClose, id }: EditUserModalProps) => {
   const { intro, github, linkedin, skills, about, repos, setValue } =
     useEditUserProfile();
-  const [user] = useAuthState(auth);
+  const { user } = useFirebaseUser();
   const router = useRouter();
 
   const handleSaveData = useCallback(async () => {

@@ -4,6 +4,7 @@ import type { AppProps } from "next/app";
 import { useEffect } from "react";
 
 import Header from "../components/Header";
+import { FirebaseAuthProvider } from "../libs/firebase/FirebaseAuthProvider";
 import { app } from "../libs/firebase/initFirebase";
 import theme from "../nextUI/theme";
 
@@ -16,12 +17,14 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <NextUIProvider theme={theme}>
-      <Header />
-      <main>
-        <Component {...pageProps} />
-      </main>
-    </NextUIProvider>
+    <FirebaseAuthProvider>
+      <NextUIProvider theme={theme}>
+        <Header />
+        <main>
+          <Component {...pageProps} />
+        </main>
+      </NextUIProvider>
+    </FirebaseAuthProvider>
   );
 }
 

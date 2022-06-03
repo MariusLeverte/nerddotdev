@@ -9,14 +9,13 @@ import { getClient } from "../../libs/sanity/sanity.server";
 import { User, UserWithProjects } from "../../types/sanity";
 import { getArraySkills } from "../../utils/skills";
 import { userWithProjectsQuery } from "../../libs/sanity/queries";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../../libs/firebase/initFirebase";
 import { RiEdit2Line } from "react-icons/ri";
 import { useState } from "react";
 import useEditUserProfile from "../../hooks/useEditUserProfile";
 import UserRepos from "../../components/Grids/UserRepos";
 import { revalidateMinutes } from "../../utils/revalidate";
 import dynamic from "next/dynamic";
+import { useFirebaseUser } from "../../libs/firebase/FirebaseAuthProvider";
 const EditUserModal = dynamic(
   () => import("../../components/Modals/EditUserModal")
 );
@@ -27,7 +26,7 @@ interface UserProps {
 
 const User = ({ user }: UserProps) => {
   const [visible, setVisible] = useState(false);
-  const [firebaseUser] = useAuthState(auth);
+  const { user: firebaseUser } = useFirebaseUser();
   const { merged } = useEditUserProfile(user);
 
   if (!user) {
