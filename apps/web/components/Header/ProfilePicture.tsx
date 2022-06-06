@@ -1,10 +1,10 @@
 import { Avatar, Button, Tooltip } from "@nextui-org/react";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../libs/firebase/initFirebase";
 import { signOut } from "firebase/auth";
 import { useRouter } from "next/router";
 import useUser from "../../hooks/userUser";
 import SpaceBetween from "../Wrapper/SpaceBetween";
+import { useFirebaseUser } from "../../libs/firebase/FirebaseAuthProvider";
 
 const ProfileMenu = () => {
   const router = useRouter();
@@ -17,7 +17,7 @@ const ProfileMenu = () => {
   return (
     <SpaceBetween y={4}>
       <Button
-        onPress={() => router.push(user?.slug || "")}
+        onPress={() => router.push(`/${user?.slug}` || "")}
         css={{
           padding: 0,
           backgroundColor: "transparent",
@@ -29,6 +29,20 @@ const ProfileMenu = () => {
         }}
       >
         Se profil
+      </Button>
+      <Button
+        onPress={() => router.push(`/${user?.slug}/invite` || "")}
+        css={{
+          padding: 0,
+          backgroundColor: "transparent",
+          color: "$accents6",
+          justifyContent: "start",
+          "&:hover": {
+            color: "$accents9",
+          },
+        }}
+      >
+        Inviter
       </Button>
       <Button
         onClick={handleAction}
@@ -49,7 +63,7 @@ const ProfileMenu = () => {
 };
 
 const ProfilePicture = () => {
-  const [user, loading] = useAuthState(auth);
+  const { user, loading } = useFirebaseUser();
 
   if (loading) return null;
   if (!user) return null;

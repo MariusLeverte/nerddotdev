@@ -1,13 +1,5 @@
-import {
-  Button,
-  Container,
-  Image,
-  Loading,
-  Spacer,
-  User,
-} from "@nextui-org/react";
+import { Button, Container, Image, Loading, Spacer } from "@nextui-org/react";
 import { AiFillGithub } from "react-icons/ai";
-import { UpdatePasswordHook } from "react-firebase-hooks/auth";
 
 interface GithubProps {
   onAuth: () => void;
@@ -45,7 +37,12 @@ const Github = ({
       )}
 
       <Spacer x={2} />
-      <Button css={{ backgroundColor: "#030303" }} rounded onClick={onAuth}>
+      <Button
+        css={{ backgroundColor: "#030303" }}
+        rounded
+        onPress={onAuth}
+        disabled={loading}
+      >
         {loading ? (
           <Loading type="points" color="currentColor" size="sm" />
         ) : (

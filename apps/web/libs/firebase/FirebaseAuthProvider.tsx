@@ -1,10 +1,18 @@
 import { User } from "firebase/auth";
+import { collection, query, where } from "firebase/firestore";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "./initFirebase";
+import { useCollectionDataOnce } from "./hooks";
+import { auth, firestore } from "./initFirebase";
 
 type Claims = { code: string } | null;
 type CountProviderProps = { children: React.ReactNode };
+type Referral = {
+  claimed: boolean;
+  code: string;
+  referrer: string;
+  user: string;
+};
 
 const FirebaseAuthContext = createContext<
   | {
@@ -14,6 +22,7 @@ const FirebaseAuthContext = createContext<
       error: Error | undefined;
       claims: Claims;
       providerData: Pick<User, "displayName" | "photoURL"> | null;
+      referrals: Referral[] | null;
     }
   | undefined
 >(undefined);
@@ -21,6 +30,9 @@ const FirebaseAuthContext = createContext<
 const FirebaseAuthProvider = ({ children }: CountProviderProps) => {
   const [user, loading, error] = useAuthState(auth);
   const [claims, setClaims] = useState<Claims>(null);
+
+  const { loadData, data: referrals } = useCollectionDataOnce();
+
   const providerData = useMemo(() => {
     if (!user) return null;
 
@@ -36,6 +48,17 @@ const FirebaseAuthProvider = ({ children }: CountProviderProps) => {
     });
   }, [user, claims]);
 
+  useEffect(() => {
+    if (!user) return;
+
+    loadData(
+      query(
+        collection(firestore, "referral"),
+        where("referrer", "==", user.uid)
+      )
+    );
+  }, [user, loadData]);
+
   const value = {
     isAuthenticated: !!user,
     user: claims?.code ? user : null,
@@ -43,6 +66,7 @@ const FirebaseAuthProvider = ({ children }: CountProviderProps) => {
     error,
     claims,
     providerData,
+    referrals,
   };
   return (
     <FirebaseAuthContext.Provider value={value}>
