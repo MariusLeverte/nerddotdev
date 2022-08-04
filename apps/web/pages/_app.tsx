@@ -1,12 +1,12 @@
-import { NextUIProvider } from "@nextui-org/react";
+import "../styles/globals.css";
+
 import { logEvent, getAnalytics } from "firebase/analytics";
 import type { AppProps } from "next/app";
 import { useEffect } from "react";
 
-import Header from "../components/Header";
+import Header from "../components/Header/Header";
 import { FirebaseAuthProvider } from "../libs/firebase/FirebaseAuthProvider";
 import { app } from "../libs/firebase/initFirebase";
-import theme from "../nextUI/theme";
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -18,12 +18,12 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <FirebaseAuthProvider>
-      <NextUIProvider theme={theme}>
+      <div className="min-h-screen">
         <Header />
         <main>
           <Component {...pageProps} />
         </main>
-      </NextUIProvider>
+      </div>
     </FirebaseAuthProvider>
   );
 }

@@ -1,15 +1,7 @@
 .social-button {
-  width: 40px;
-  height: 40px;
-  background-color: #000;
-  border-radius: 50%;
-  display: inline-flex;
-  justify-content: center;
-
-  transition: var(--nextui-transitions-default);
-  box-shadow: var(--nextui-shadows-xs);
+  @apply w-10 h-10 rounded-full bg-black inline-flex items-center justify-center transition-transform duration-200;
 }
 
 .social-button:hover {
-  transform: translate(calc(var(--nextui-space-5) * -1));
+  @apply -translate-x-2;
 }

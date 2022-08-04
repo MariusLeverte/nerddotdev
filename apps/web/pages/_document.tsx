@@ -5,7 +5,6 @@ import Document, {
   NextScript,
   DocumentContext,
 } from "next/document";
-import { CssBaseline } from "@nextui-org/react";
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -52,8 +51,6 @@ class MyDocument extends Document {
           <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
           <meta name="msapplication-TileColor" content="#00aba9" />
           <meta name="theme-color" content="#ffffff" />
-
-          {CssBaseline.flush()}
         </Head>
         <body>
           <Main />

@@ -1,4 +1,4 @@
-import { Button, Container, Grid, Spacer } from "@nextui-org/react";
+import { Button, Spacer } from "@nextui-org/react";
 import { PortableText } from "@portabletext/react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { groq } from "next-sanity";
@@ -16,6 +16,7 @@ import UserRepos from "../../components/Grids/UserRepos";
 import { revalidateMinutes } from "../../utils/revalidate";
 import dynamic from "next/dynamic";
 import { useFirebaseUser } from "../../libs/firebase/FirebaseAuthProvider";
+import { Container, Grid, Text } from "ui";
 const EditUserModal = dynamic(
   () => import("../../components/Modals/EditUserModal")
 );
@@ -38,14 +39,13 @@ const User = ({ user }: UserProps) => {
   const isCurrentUser = firebaseUser?.uid === user?._id;
 
   return (
-    <>
+    <div className="my-20 space-y-10 lg:space-y-20">
       <Meta
         title={user.name + " - Nerd.dev"}
         description={`${user.name}${data.intro && ` - ` + data.intro}`}
-        keywords={getArraySkills(user.skills).join(",")}
+        keywords={getArraySkills(user?.skills ?? []).join(",")}
       />
-      <Spacer y={10} />
-      <Container md as="section">
+      <Container as="section">
         <UserPresentation
           name={user.name || ""}
           intro={data.intro}
@@ -53,29 +53,43 @@ const User = ({ user }: UserProps) => {
           social={data.social}
         />
       </Container>
-
       {data.about && (
-        <>
-          <Spacer y={5} />
-          <Container md as="section">
-            <Grid.Container justify="center">
-              <Grid md={6} direction="column" css={{ textAlign: "center" }}>
-                <PortableText value={data.about} components={{}} />
-              </Grid>
-            </Grid.Container>
-          </Container>
-        </>
-      )}
-      <Spacer y={5} />
-      <Container
-        fluid
-        as="section"
-        css={{ backgroundColor: "#F7F9FE", py: 60, px: 0 }}
-      >
-        <Container md>
-          <Table skills={user.skills} />
+        <Container as="section" className="flex justify-center">
+          <div className="lg:w-1/2 text-center">
+            <PortableText
+              components={{
+                block: {
+                  h2: ({ children }) => {
+                    return (
+                      <Text as="h2" className="text-2xl lg:text-4xl mb-4">
+                        {children}
+                      </Text>
+                    );
+                  },
+                  normal: ({ children }) => (
+                    <Text className="mb-3">{children}</Text>
+                  ),
+                },
+              }}
+              value={data.about}
+            />
+          </div>
         </Container>
-      </Container>
+      )}
+
+      {user.skills && (
+        <Container
+          width="xl"
+          className="bg-violet-100 shadow shadow-indigo-500/20 rounded-xl"
+        >
+          <Container width="lg" className="py-8">
+            <Table skills={user.skills} />
+          </Container>
+        </Container>
+      )}
+
+      {/* 
+      
       {data.repos && (
         <>
           <Spacer y={5} />
@@ -114,8 +128,8 @@ const User = ({ user }: UserProps) => {
             id={user._id}
           />
         </>
-      )}
-    </>
+      )} */}
+    </div>
   );
 };
 

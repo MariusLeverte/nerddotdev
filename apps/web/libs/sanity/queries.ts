@@ -13,3 +13,5 @@ export const userWithProjectsQuery = groq`*[_type == "user" && slug.current == $
       }[0].role
     }
   }`;
+
+export const pageWithContent = groq`*[_type == "page" && _id == $page][0]`;

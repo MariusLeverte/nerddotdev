@@ -1,9 +1,13 @@
-import { Container, Grid, Text } from "@nextui-org/react";
+import { GetStaticProps } from "next";
+import { Container, Text } from "ui";
 import Landing from "../components/MatterJS/Landing";
 import Meta from "../components/SEO/Meta";
+import { pageWithContent } from "../libs/sanity/queries";
+import { getClient } from "../libs/sanity/sanity.server";
 import { getCanoniical } from "../utils/canonical";
 
-const Home = () => {
+const Home = ({ data }: { data: any }) => {
+  const [banner, ...rest] = data.content;
   return (
     <>
       <Meta
@@ -15,29 +19,38 @@ const Home = () => {
         }}
         keywords="webutvikler,frontend,miljø for utviklere"
       />
-      <Container css={{ height: "100vh" }} display="flex" alignItems="center">
-        <Landing />
-        <Container css={{ zIndex: 10, padding: 0 }} fluid>
-          <Grid.Container justify="center">
-            <Grid md={8}>
-              <Text
-                h1
-                size="$md"
-                css={{
-                  "@md": {
-                    fontSize: "$xl",
-                  },
-                }}
-              >
-                Snart kommer <em>kanskje</em> det kuleste prosjektet for
-                utviklere i Norge
-              </Text>
-            </Grid>
-          </Grid.Container>
+      <div className="h-screen absolute top-0 w-full">
+        <Container width="xl" className="h-full flex items-center">
+          <Container width="md" className="relative z-10 text-center space-y-6">
+            <Text as="h1" weight="bold" className="text-2xl lg:text-6xl">
+              {banner.title}
+            </Text>
+            {banner.text && (
+              <Container width="sm">
+                <Text as="h2" weight="normal" className="text-lg lg:text-2xl">
+                  {banner.text}
+                </Text>
+              </Container>
+            )}
+          </Container>
+          <Landing />
         </Container>
-      </Container>
+      </div>
     </>
   );
+};
+
+export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
+  const data = await getClient(preview).fetch(pageWithContent, {
+    page: "0381cc1d-e982-485a-b965-59204bae7cdd",
+  });
+
+  return {
+    props: {
+      data,
+    },
+    revalidate: 3600,
+  };
 };
 
 export default Home;

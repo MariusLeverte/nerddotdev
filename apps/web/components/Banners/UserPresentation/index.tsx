@@ -1,4 +1,6 @@
-import { Grid, Image, Spacer, Text } from "@nextui-org/react";
+import Image from "next/image";
+import { Grid, SpaceBetween, Text } from "ui";
+import { TextSize } from "ui/src/styles/Size";
 import { User } from "../../../types/sanity";
 import SocialButton from "./SocialButton";
 
@@ -16,63 +18,39 @@ const UserPresentation = ({
   social,
 }: UserPresentationProps) => {
   return (
-    <Grid.Container
-      gap={4}
-      justify="center"
-      alignItems="center"
-      css={{ padding: 0 }}
-      wrap="wrap-reverse"
-    >
-      <Grid xs={12} sm={5} direction="column">
-        <Text h1 css={{ lineHeight: "$xs" }}>
-          <Text
-            span
-            weight="bold"
-            size="$lg"
-            css={{
-              "@md": {
-                fontSize: "$xl",
-              },
-            }}
-          >
+    <Grid className="items-center">
+      <Grid.Column className="col-span-6 order-2">
+        <Text as="h1" className="space-y-2">
+          <Text as="span" weight="bold" className="text-4xl lg:text-6xl">
             {name} {intro && "-"}
           </Text>{" "}
           {intro && (
-            <>
-              <br />
-              <Text
-                span
-                weight="medium"
-                size="$md"
-                css={{
-                  "@md": {
-                    fontSize: "$lg",
-                  },
-                }}
-              >
-                {intro}
-              </Text>
-            </>
+            <Text
+              as="span"
+              weight="medium"
+              className="text-2xl lg:text-4xl block"
+            >
+              {intro}
+            </Text>
           )}
         </Text>
-        <Spacer y={2} />
-        <Grid.Container gap={1}>
-          {social?.github && (
-            <Grid>
-              <SocialButton id={social.github} type="github" />
-            </Grid>
-          )}
+        <div className="space-x-1 mt-8">
+          {social?.github && <SocialButton id={social.github} type="github" />}
           {social?.linkedin && (
-            <Grid>
-              <SocialButton id={social.linkedin} type="linkedin" />
-            </Grid>
+            <SocialButton id={social.linkedin} type="linkedin" />
           )}
-        </Grid.Container>
-      </Grid>
-      <Grid xs={12} sm={7}>
-        <Image src={photoUrl} alt={name} />
-      </Grid>
-    </Grid.Container>
+        </div>
+      </Grid.Column>
+      <Grid.Column className="col-span-6 order-1 lg:order-2">
+        <Image
+          src={photoUrl}
+          alt={name}
+          width={460}
+          height={460}
+          className="rounded-xl"
+        />
+      </Grid.Column>
+    </Grid>
   );
 };
 

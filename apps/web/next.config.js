@@ -1,4 +1,6 @@
-module.exports = {
+const withTM = require("next-transpile-modules")(["ui"]);
+
+module.exports = withTM({
   reactStrictMode: true,
   eslint: {
     ignoreDuringBuilds: true,
@@ -6,4 +8,5 @@ module.exports = {
   typescript: {
     ignoreBuildErrors: true,
   },
-};
+  images: { domains: ["cdn.sanity.io", "avatars.githubusercontent.com"] },
+});

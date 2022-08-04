@@ -149,38 +149,30 @@ const Landing = () => {
     };
   }, []);
 
+  const colors = ["green", "lightGreen", "yellow", "grey", "purple"];
+  const words = [
+    "Hello world 🚀",
+    "Awesome!",
+    "Endelig",
+    "Frontend",
+    "Uvirkelig 😱",
+    "Muligheter!",
+    "Nyhet 🥰",
+  ];
+
   return (
     <div ref={scene} className={styles.matter}>
-      <div className={clsx([styles.chip, styles.green])}>
-        <span>Hello world 🚀</span>
-      </div>
-      <div className={clsx(styles.chip, styles.lightGreen)}>
-        <span>Awesome!</span>
-      </div>
-      <div className={clsx(styles.chip, styles.yellow)}>
-        <span>Endelig</span>
-      </div>
-      <div className={clsx(styles.chip, styles.grey)}>
-        <span>Frontend</span>
-      </div>
-      <div className={clsx(styles.chip, styles.purple)}>
-        <span>Stort savn 💔</span>
-      </div>
-      <div className={clsx(styles.chip, styles.green)}>
-        <span>Buzzword</span>
-      </div>
-      <div className={clsx(styles.chip, styles.lightGreen)}>
-        <span>Nice!!</span>
-      </div>
-      <div className={clsx(styles.chip, styles.purple)}>
-        <span>Uvirkelig 😱</span>
-      </div>
-      <div className={clsx(styles.chip, styles.green)}>
-        <span>Muligheter!</span>
-      </div>
-      <div className={clsx(styles.chip, styles.green)}>
-        <span>Nyhet 🥰</span>
-      </div>
+      {words.map((word, i) => (
+        <div
+          className={clsx(
+            styles.chip,
+            styles[colors[i < colors.length ? i : i - colors.length]]
+          )}
+          key={i}
+        >
+          <span>{word}</span>
+        </div>
+      ))}
     </div>
   );
 };

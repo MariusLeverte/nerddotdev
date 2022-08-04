@@ -37,7 +37,7 @@ const SocialButton = ({ id, type }: SocialButtonProps) => {
   return (
     <a
       href={getHref(id, type)}
-      className={styles["social-button"]}
+      className="w-10 h-10 rounded-full bg-primary inline-flex items-center justify-center transition-transform duration-200 hover:-translate-x-1"
       target="_blank"
       rel="noopener noreferrer"
     >
