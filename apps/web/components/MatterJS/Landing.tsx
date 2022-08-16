@@ -134,6 +134,15 @@ const Landing = () => {
       },
     });
 
+    mouseConstraint.mouse.element.removeEventListener(
+      "mousewheel",
+      mouseConstraint.mouse.mousewheel
+    );
+    mouseConstraint.mouse.element.removeEventListener(
+      "DOMMouseScroll",
+      mouseConstraint.mouse.mousewheel
+    );
+
     World.add(engine.world, mouseConstraint);
     render.mouse = mouse;
     window.requestAnimationFrame(mapHTML);

@@ -19,9 +19,9 @@ const Home = ({ data }: { data: any }) => {
         }}
         keywords="webutvikler,frontend,miljø for utviklere"
       />
-      <div className="h-screen absolute top-0 w-full">
-        <Container width="xl" className="h-full flex items-center">
-          <Container width="md" className="relative z-10 text-center space-y-6">
+      <div className="absolute top-0 w-full">
+        <div className="h-screen flex items-center relative">
+          <Container width="xl" className="relative z-10 text-center space-y-6">
             <Text as="h1" weight="bold" className="text-2xl lg:text-6xl">
               {banner.title}
             </Text>
@@ -33,8 +33,9 @@ const Home = ({ data }: { data: any }) => {
               </Container>
             )}
           </Container>
+
           <Landing />
-        </Container>
+        </div>
       </div>
     </>
   );
