@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "main": "./index.tsx",
   "types": "./index.tsx",
+  "files": [
+    "tailwind.config.js"
+  ],
   "license": "MIT",
   "scripts": {
     "lint": "eslint *.ts*",

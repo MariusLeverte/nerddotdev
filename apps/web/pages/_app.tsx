@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import Header from "../components/Header/Header";
 import { FirebaseAuthProvider } from "../libs/firebase/FirebaseAuthProvider";
 import { app } from "../libs/firebase/initFirebase";
+import AlertProvider from "../components/Alerts/AlertProvider";
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -24,6 +25,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </main>
       </div>
+      <AlertProvider />
     </FirebaseAuthProvider>
   );
 }

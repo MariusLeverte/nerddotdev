@@ -12,6 +12,8 @@ const useSanityData = <Value>(
   const [data, setData] = useState<Value | null>(null);
 
   const getSanityData = useCallback(async () => {
+    if (data || loading || error) return;
+
     try {
       setLoading(true);
       if (typeof query === "string") {
@@ -30,10 +32,12 @@ const useSanityData = <Value>(
     } finally {
       setLoading(false);
     }
-  }, [preview, query]);
+  }, [data, loading, error, query, preview]);
 
   useEffect(() => {
-    if (loading || data || error) return;
+    if (loading) return;
+    if (data) return;
+    if (error) return;
     if (lazy) return;
 
     getSanityData();

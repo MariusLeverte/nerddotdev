@@ -21,6 +21,7 @@ export interface ButtonProps extends React.ComponentPropsWithoutRef<"button"> {
   bordered?: boolean;
   rounded?: RoundedSizes;
   shadow?: boolean;
+  animated?: boolean;
 }
 
 const Button = ({
@@ -30,6 +31,7 @@ const Button = ({
   rounded = "lg",
   shadow,
   children,
+  animated,
   ...props
 }: ButtonProps) => {
   return (
@@ -43,7 +45,8 @@ const Button = ({
           : TextColorOnBackgroundColor[color],
         ButtonSize[size],
         RoundedSize[rounded],
-        shadow && [ShadowColor[color], HoverShadowColor[color]]
+        shadow && [ShadowColor[color], HoverShadowColor[color]],
+        animated && "transition-all"
       )}
       {...props}
     >
