@@ -1,13 +1,7 @@
-import {
-  Button,
-  Container,
-  Image,
-  Loading,
-  Spacer,
-  User,
-} from "@nextui-org/react";
 import { AiFillGithub } from "react-icons/ai";
-import { UpdatePasswordHook } from "react-firebase-hooks/auth";
+import { Button, Container } from "ui";
+import Lottie from "lottie-react";
+import Image from "next/image";
 
 interface GithubProps {
   onAuth: () => void;
@@ -23,31 +17,26 @@ const Github = ({
   loading = false,
 }: GithubProps) => {
   return (
-    <Container
-      sm
-      alignItems="center"
-      justify="center"
-      display="flex"
-      direction="column"
-      className="space-x-6"
-    >
+    <Container className="space-y-6 flex items-center flex-col" width="sm">
       {photoUrl ? (
         <Image
           src={photoUrl}
           alt={displayName || ""}
-          width={80}
-          height={80}
+          width={160}
+          height={160}
           objectFit="cover"
-          css={{ borderRadius: 80 }}
+          className="rounded-full"
         />
       ) : (
         <AiFillGithub size={80} />
       )}
 
-      <Spacer x={2} />
-      <Button css={{ backgroundColor: "#030303" }} rounded onClick={onAuth}>
+      <Button onClick={onAuth} rounded="full">
         {loading ? (
-          <Loading type="points" color="currentColor" size="sm" />
+          <Lottie
+            animationData={require("../../lottie/9904-bouncy-cartoon-ball-loader.json")}
+            style={{ height: 24 }}
+          />
         ) : (
           <> {displayName ? `Hei ${displayName}` : "Logg inn"}</>
         )}

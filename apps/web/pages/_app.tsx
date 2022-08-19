@@ -18,9 +18,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <FirebaseAuthProvider>
-      <div className="min-h-screen">
+      <div className="min-h-screen h-screen flex flex-col">
         <Header />
-        <main>
+        <main className="flex-1">
           <Component {...pageProps} />
         </main>
       </div>

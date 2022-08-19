@@ -1,10 +1,10 @@
-import { Avatar, Button, Tooltip } from "@nextui-org/react";
+import { Avatar, Tooltip } from "@nextui-org/react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../libs/firebase/initFirebase";
 import { signOut } from "firebase/auth";
 import { useRouter } from "next/router";
 import useUser from "../../hooks/userUser";
-import SpaceBetween from "../Wrapper/SpaceBetween";
+import { Button } from "ui";
 
 const ProfileMenu = () => {
   const router = useRouter();
@@ -15,36 +15,18 @@ const ProfileMenu = () => {
   };
 
   return (
-    <SpaceBetween y={4}>
+    <div className="space-y-4 flex flex-col">
       <Button
-        onPress={() => router.push(user?.slug || "")}
-        css={{
-          padding: 0,
-          backgroundColor: "transparent",
-          color: "$accents6",
-          justifyContent: "start",
-          "&:hover": {
-            color: "$accents9",
-          },
-        }}
+        onClick={() => router.push(user?.slug || "")}
+        color="transparent"
+        size="sm"
       >
         Se profil
       </Button>
-      <Button
-        onClick={handleAction}
-        css={{
-          padding: 0,
-          backgroundColor: "transparent",
-          color: "$accents6",
-          justifyContent: "start",
-          "&:hover": {
-            color: "$error",
-          },
-        }}
-      >
+      <Button onClick={handleAction} color="transparent" size="sm">
         Logg ut
       </Button>
-    </SpaceBetween>
+    </div>
   );
 };
 

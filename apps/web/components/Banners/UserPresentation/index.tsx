@@ -1,6 +1,5 @@
 import Image from "next/image";
-import { Grid, SpaceBetween, Text } from "ui";
-import { TextSize } from "ui/src/styles/Size";
+import { Grid, Text } from "ui";
 import { User } from "../../../types/sanity";
 import SocialButton from "./SocialButton";
 
