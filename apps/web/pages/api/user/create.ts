@@ -55,7 +55,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
       }
     }
 
-    await getClient(true).createOrReplace({
+    await getClient(true).createIfNotExists({
       _id: validToken.uid,
       _type: "user",
       name: validToken.name,

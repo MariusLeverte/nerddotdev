@@ -7,7 +7,7 @@ import { getClient } from "../libs/sanity/sanity.server";
 import { getCanoniical } from "../utils/canonical";
 
 const Home = ({ data }: { data: any }) => {
-  const [banner, ...rest] = data.content;
+  const [banner] = data.content;
   return (
     <>
       <Meta

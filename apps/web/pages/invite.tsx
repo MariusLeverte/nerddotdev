@@ -16,18 +16,15 @@ import { Document, getReferralCodeInformation } from "./api/invite/code";
 interface InviteProps {
   claimed?: boolean;
   name?: User["name"];
-  photo?: User["photo"];
   data?: Document;
 }
 
-const Invite = ({ claimed, name, photo, data }: InviteProps) => {
+const Invite = ({ claimed, name, data }: InviteProps) => {
   const [creating, setCreating] = useState(false);
   const router = useRouter();
-  const { providerData, user } = useFirebaseUser();
+  const { providerData } = useFirebaseUser();
   const [signInWithGithub, githubUser, githubLoading] =
     useSignInWithGithub(auth);
-
-  console.log({ claimed, name, photo, data, githubUser, user });
 
   const handleAction = useCallback(async () => {
     try {
@@ -39,7 +36,6 @@ const Invite = ({ claimed, name, photo, data }: InviteProps) => {
 
   useEffect(() => {
     if (!githubUser) return;
-    if (githubUser.operationType !== "link") return;
     if (!data?.id) return;
     setCreating(true);
 
@@ -147,7 +143,6 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   return {
     props: {
       name: user?.name || "",
-      photo: user?.photo || "",
       data: data.result,
     },
   };

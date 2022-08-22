@@ -158,6 +158,9 @@ const Landing = () => {
     "Uvirkelig 😱",
     "Muligheter!",
     "Nyhet 🥰",
+    "Lær mer / del kunnskap",
+    "Sparre",
+    "Backet av miljø 🤩",
   ];
 
   return (

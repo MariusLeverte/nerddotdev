@@ -35,7 +35,7 @@ const UserInviteCodeCard = ({ code, user }: Props) => {
 
   const handleOnClick = () => {
     if (user) {
-      router.push(`/${data?.slug}`);
+      router.push(`/${data?.slug?.current}`);
       return;
     }
     if (code) {
