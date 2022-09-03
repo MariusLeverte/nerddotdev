@@ -14,7 +14,7 @@ const Home = ({ data }: { data: any }) => {
   return (
     <>
       <Meta
-        title="Kanskje Norges kuleste utvikler miljø - Nerd.dev"
+        title="Kanskje norges kuleste utvikler miljø - Nerd.dev"
         description="Webutvikler miljø for de beste utviklerne i Norge av utviklere"
         canonical={getCanoniical()}
         locale={{
@@ -22,7 +22,7 @@ const Home = ({ data }: { data: any }) => {
         }}
         keywords="webutvikler,frontend,miljø for utviklere"
       />
-      <div className="h-screen absolute top-0 w-full pt-20 md:pt-0 bg-[#ffe4c4]">
+      <div className="h-screen absolute top-0 w-full pt-28 md:pt-0 bg-[#ffe4c4]">
         <Container width="xl" className="h-full flex items-center">
           <Grid className="flex-1 w-full h-full">
             <Grid.Column className="col-span-12 lg:col-span-6 flex flex-col justify-center">
