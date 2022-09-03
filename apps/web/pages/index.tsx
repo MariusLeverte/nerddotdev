@@ -15,7 +15,7 @@ const Home = ({ data }: { data: any }) => {
   return (
     <>
       <Meta
-        title="Kanskje norges kuleste utvikler miljø - Nerd.dev"
+        title="Kanskje Norges kuleste utvikler miljø - Nerd.dev"
         description="Webutvikler miljø for de beste utviklerne i Norge av utviklere"
         canonical={getCanoniical()}
         locale={{
