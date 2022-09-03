@@ -1,13 +1,16 @@
 import { GetStaticProps } from "next";
-import { Container, Text } from "ui";
-import Landing from "../components/MatterJS/Landing";
+import { Container, Grid, Text } from "ui";
 import Meta from "../components/SEO/Meta";
 import { pageWithContent } from "../libs/sanity/queries";
 import { getClient } from "../libs/sanity/sanity.server";
 import { getCanoniical } from "../utils/canonical";
+import Spline from "@splinetool/react-spline";
+import { useRef } from "react";
 
 const Home = ({ data }: { data: any }) => {
   const [banner] = data.content;
+  const spline = useRef<any>();
+
   return (
     <>
       <Meta
@@ -19,21 +22,35 @@ const Home = ({ data }: { data: any }) => {
         }}
         keywords="webutvikler,frontend,miljø for utviklere"
       />
-      <div className="h-screen absolute top-0 w-full">
+      <div className="h-screen absolute top-0 w-full pt-20 md:pt-0 bg-[#ffe4c4]">
         <Container width="xl" className="h-full flex items-center">
-          <Container width="md" className="relative z-10 text-center space-y-6">
-            <Text as="h1" weight="bold" className="text-2xl lg:text-6xl">
-              {banner.title}
-            </Text>
-            {banner.text && (
-              <Container width="sm">
-                <Text as="h2" weight="normal" className="text-lg lg:text-2xl">
-                  {banner.text}
-                </Text>
-              </Container>
-            )}
-          </Container>
-          <Landing />
+          <Grid className="flex-1 w-full h-full">
+            <Grid.Column className="col-span-12 lg:col-span-6 flex flex-col justify-center">
+              <Text as="h1" weight="bold" className="text-2xl lg:text-6xl">
+                {banner.title}
+              </Text>
+              {banner.text && (
+                <>
+                  <Text
+                    as="h2"
+                    weight="normal"
+                    className="text-lg lg:text-2xl mt-4"
+                  >
+                    {banner.text}
+                  </Text>
+                  <Text as="span" className="mt-6 text-sm italic">
+                    Invitasjoner slippes fortløpende
+                  </Text>
+                </>
+              )}
+            </Grid.Column>
+            <Grid.Column className="col-span-12 lg:col-span-6 overflow-visible">
+              <Spline
+                scene="https://prod.spline.design/FK8UjuMdGShMnScz/scene.splinecode"
+                onLoad={(splineApp) => (spline.current = splineApp)}
+              />
+            </Grid.Column>
+          </Grid>
         </Container>
       </div>
     </>

@@ -13,6 +13,8 @@
     "@nextui-org/react": "^1.0.0-beta.9",
     "@portabletext/react": "^1.0.6",
     "@sanity/image-url": "^1.0.1",
+    "@splinetool/react-spline": "^2.2.2",
+    "@splinetool/runtime": "^0.9.105",
     "clsx": "^1.1.1",
     "crypto": "^1.0.1",
     "firebase": "^9.8.1",
