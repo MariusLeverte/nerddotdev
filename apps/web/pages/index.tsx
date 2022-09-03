@@ -6,6 +6,7 @@ import { getClient } from "../libs/sanity/sanity.server";
 import { getCanoniical } from "../utils/canonical";
 import Spline from "@splinetool/react-spline";
 import { useRef } from "react";
+import { BrowserView, MobileView } from "react-device-detect";
 
 const Home = ({ data }: { data: any }) => {
   const [banner] = data.content;
@@ -44,11 +45,19 @@ const Home = ({ data }: { data: any }) => {
                 </>
               )}
             </Grid.Column>
-            <Grid.Column className="col-span-12 lg:col-span-6 overflow-visible">
+            <Grid.Column className="col-span-12 lg:col-span-6 overflow-visible relative">
               <Spline
                 scene="https://prod.spline.design/FK8UjuMdGShMnScz/scene.splinecode"
                 onLoad={(splineApp) => (spline.current = splineApp)}
               />
+              <div className="absolute bottom-6 text-center left-0 right-0 opacity-50">
+                <BrowserView>
+                  <Text className="text-sm">Hold musepekeren nede</Text>
+                </BrowserView>
+                <MobileView>
+                  <Text className="text-sm">To fingre for å se rundt</Text>
+                </MobileView>
+              </div>
             </Grid.Column>
           </Grid>
         </Container>
