@@ -47,7 +47,7 @@ const Invite = ({ claimed, name, data }: InviteProps) => {
         },
         body: JSON.stringify({
           id: data.id,
-          code: router.query.kode,
+          code: router.query.code,
           providerData: {
             screenName: githubUser.user?.reloadUserInfo?.screenName,
           },
@@ -58,7 +58,7 @@ const Invite = ({ claimed, name, data }: InviteProps) => {
           router.replace(`/${response.slug}`);
         });
     });
-  }, [data?.id, githubUser, router, router.query.kode]);
+  }, [data?.id, githubUser, router, router.query.code]);
 
   if (claimed) {
     return (

@@ -1,5 +1,7 @@
+import { userKey } from "./../../../utils/key";
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
+import { THREADS_API } from "../../../constants";
 import admin from "../../../libs/firebase/initFirebase.server";
 import { slugInUse } from "../../../libs/sanity/queries";
 import { getClient } from "../../../libs/sanity/sanity.server";
@@ -26,19 +28,31 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
       throw Error("No token valid");
     }
 
-    await admin.auth().setCustomUserClaims(validToken.sub, { code });
-    await admin
-      .firestore()
-      .collection("metadata")
-      .doc(validToken.uid)
-      .set({ code });
-    await admin
-      .firestore()
-      .collection("referral")
-      .doc(id)
-      .set({ claimed: true, user: validToken.uid }, { merge: true });
+    const name = validToken.name || providerData.screenName;
 
-    let userSlug = slugify(validToken.name);
+    // const threadUser = await fetch(`${THREADS_API}/user/create`, {
+    //   method: "POST",
+    //   body: JSON.stringify({
+    //     key: process.env.THREADS_API_KEY,
+    //     id: userKey(validToken.uid),
+    //     username: name,
+    //   }),
+    // }).then((res) => res.json());
+
+    await Promise.all([
+      admin
+        .firestore()
+        .collection("metadata")
+        .doc(validToken.uid)
+        .set({ code }),
+      admin
+        .firestore()
+        .collection("referral")
+        .doc(id)
+        .set({ claimed: true, user: validToken.uid }, { merge: true }),
+    ]);
+
+    let userSlug = slugify(name);
 
     const sameSlug: { _id: string } | null = await getClient(true).fetch(
       slugInUse,
@@ -50,7 +64,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
         if (providerData.screenName) {
           userSlug = slugify(providerData.screenName);
         } else {
-          userSlug = slugify(validToken.name + generateKey(4));
+          userSlug = slugify(name + generateKey(4));
         }
       }
     }
@@ -58,7 +72,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
     await getClient(true).createIfNotExists({
       _id: validToken.uid,
       _type: "user",
-      name: validToken.name,
+      name: name,
       slug: {
         _type: "slug",
         current: userSlug,

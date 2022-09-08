@@ -1,3 +1,4 @@
+import { slugify } from "./../../../utils/slug";
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 import admin from "../../../libs/firebase/initFirebase.server";
@@ -27,6 +28,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
     await getClient(true).create({
       _type: "skill",
       name: name,
+      slug: slugify(name),
       category: [
         {
           _key: generateKey(10),
