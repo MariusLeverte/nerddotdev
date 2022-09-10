@@ -1,5 +1,5 @@
 {
-  "name": "cornsilkaardvark",
+  "name": "sanity",
   "private": true,
   "version": "1.0.0",
   "description": "",
@@ -31,5 +31,10 @@
   "devDependencies": {
     "prettier": "^2.6.2",
     "sanity-codegen": "^0.9.8"
+  },
+  "workspaces": {
+    "nohoist": [
+      "**/@sanity/**"
+    ]
   }
 }
