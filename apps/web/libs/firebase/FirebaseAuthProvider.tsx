@@ -1,11 +1,11 @@
 import { User } from "firebase/auth";
-import { collection, query, where } from "firebase/firestore";
+import { collection, doc, getDoc, query, where } from "firebase/firestore";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionDataOnce } from "./hooks";
 import { auth, firestore } from "./initFirebase";
 
-type Claims = { code: string } | null;
+type Metadata = { code?: string; thread?: string } | null;
 type CountProviderProps = { children: React.ReactNode };
 type Referral = {
   claimed: boolean;
@@ -14,23 +14,24 @@ type Referral = {
   user: string;
 };
 
-const FirebaseAuthContext = createContext<
-  | {
-      isAuthenticated: boolean;
-      user: User | null | undefined;
-      loading: boolean;
-      error: Error | undefined;
-      claims: Claims;
-      providerData: Pick<User, "displayName" | "photoURL"> | null;
-      referrals: Referral[] | null;
-    }
-  | undefined
->(undefined);
+const FirebaseAuthContext =
+  createContext<
+    | {
+        isAuthenticated: boolean;
+        user: User | null | undefined;
+        loading: boolean;
+        error: Error | undefined;
+        metadata: Metadata;
+        providerData: Pick<User, "displayName" | "photoURL"> | null;
+        referrals: Referral[] | null;
+      }
+    | undefined
+  >(undefined);
 
 const FirebaseAuthProvider = ({ children }: CountProviderProps) => {
   const [user, loading, error] = useAuthState(auth);
-  const [claims, setClaims] = useState<Claims>(null);
-  const { loadData, data: referrals } = useCollectionDataOnce();
+  const [metadata, setMetadata] = useState<Metadata>(null);
+  const { loadData: loadReferrals, data: referrals } = useCollectionDataOnce();
 
   const providerData = useMemo(() => {
     if (!user) return null;
@@ -40,35 +41,26 @@ const FirebaseAuthProvider = ({ children }: CountProviderProps) => {
 
   useEffect(() => {
     if (!user) return;
-    if (claims) return;
 
-    user.getIdTokenResult().then((result) => {
-      setClaims({ code: result?.claims?.code as string });
-    });
-  }, [user, claims]);
-
-  useEffect(() => {
-    if (!user) return;
-
-    loadData(
+    loadReferrals(
       query(
         collection(firestore, "referral"),
         where("referrer", "==", user.uid)
       )
     );
-  }, [user, loadData]);
+  }, [user, loadReferrals]);
 
   const value = useMemo(
     () => ({
       isAuthenticated: !!user,
-      user: claims?.code ? user : null,
+      user: user,
       loading,
       error,
-      claims,
+      metadata,
       providerData,
       referrals,
     }),
-    [claims, error, loading, providerData, referrals, user]
+    [metadata, error, loading, providerData, referrals, user]
   );
 
   return (

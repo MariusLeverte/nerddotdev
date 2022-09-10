@@ -2,7 +2,7 @@ import { Avatar } from "@nextui-org/react";
 import { auth } from "../../libs/firebase/initFirebase";
 import { signOut } from "firebase/auth";
 import { useRouter } from "next/router";
-import useUser from "../../hooks/userUser";
+import useUser from "../../hooks/useUser";
 import { Button } from "ui";
 import { useState } from "react";
 import { useFirebaseUser } from "../../libs/firebase/FirebaseAuthProvider";
@@ -24,6 +24,13 @@ const ProfileMenu = () => {
           size="xs"
         >
           Se profil
+        </Button>
+        <Button
+          onClick={() => router.push(`/${user?.slug}/edit` || "")}
+          color="transparent"
+          size="xs"
+        >
+          Rediger profil
         </Button>
         <Button
           onClick={() => router.push(`/${user?.slug}/invite` || "")}

@@ -2,7 +2,6 @@ import clsx from "clsx";
 import { ReactChild } from "react";
 import { Editor, Transforms, Element as SlateElement } from "slate";
 import { useSlate } from "slate-react";
-import styles from "./Editor.module.css";
 import { Icon, IconTypes } from "./SlateEditorIcon";
 import { ElementType, MarkType } from "./SlateEditorSerializer";
 
@@ -86,8 +85,8 @@ const Button = ({
   children: ReactChild;
 }) => (
   <button
-    className={clsx(styles.button, {
-      [styles.active]: isActive,
+    className={clsx("text-slate-500 flex items-center", {
+      "text-red-900": isActive,
     })}
     onClick={(e) => {
       e.preventDefault();

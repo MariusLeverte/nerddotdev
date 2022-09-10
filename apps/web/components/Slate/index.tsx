@@ -3,11 +3,13 @@ import { Editable, withReact, Slate } from "slate-react";
 import { createEditor, Descendant } from "slate";
 import { withHistory } from "slate-history";
 
-import { Container } from "@nextui-org/react";
-import styles from "./Editor.module.css";
 import { BlockButton, MarkButton } from "./SlateEditorButtons";
 import { Element, Mark } from "./SlateEditorSerializer";
 import { toPortableText } from "./utils";
+import { Container } from "ui";
+import clsx from "clsx";
+import { BorderColor } from "ui/src/styles/Color";
+import { RoundedSize } from "ui/src/styles/Size";
 
 interface SlateEditorProps {
   initialValue: Descendant[];
@@ -21,18 +23,15 @@ const SlateEditor = ({ initialValue, onChange }: SlateEditorProps) => {
 
   return (
     <Container
-      fluid
-      css={{
-        backgroundColor: "$accents0",
-        borderRadius: "$sm",
-      }}
+      className={clsx("bg-white p-6", BorderColor.primary, RoundedSize.lg)}
+      padding={false}
     >
       <Slate
         editor={editor}
         value={initialValue}
         onChange={(value) => onChange(toPortableText(value))}
       >
-        <div className={styles.toolbar}>
+        <div className="flex space-x-2 border-b border-slate-500 pb-2 mb-4">
           <BlockButton format="h2" icon="heading" />
           <MarkButton format="bold" icon="bold" />
           <MarkButton format="italic" icon="italic" />

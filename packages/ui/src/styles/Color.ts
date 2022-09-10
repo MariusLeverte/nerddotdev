@@ -7,6 +7,7 @@ export const BorderColor: Record<NormalColors, string> = {
   warning: "border border-warning border-2",
   error: "border border-error border-2",
   transparent: "",
+  light: "",
 };
 
 export const BackgroundColor: Record<NormalColors, string> = {
@@ -16,6 +17,7 @@ export const BackgroundColor: Record<NormalColors, string> = {
   warning: "bg-warning",
   error: "bg-error",
   transparent: "bg-transparent",
+  light: "bg-white",
 };
 
 export const TextColorOnBackgroundColor: Record<NormalColors, string> = {
@@ -25,6 +27,7 @@ export const TextColorOnBackgroundColor: Record<NormalColors, string> = {
   warning: "text-white",
   error: "text-white",
   transparent: "text-black",
+  light: "",
 };
 
 export const TextColorOnBorderColor: Record<NormalColors, string> = {
@@ -34,6 +37,7 @@ export const TextColorOnBorderColor: Record<NormalColors, string> = {
   warning: "text-warning",
   error: "text-error",
   transparent: "text-black",
+  light: "",
 };
 
 export const ShadowColor: Record<NormalColors, string> = {
@@ -43,6 +47,7 @@ export const ShadowColor: Record<NormalColors, string> = {
   warning: "shadow shadow-warning/50",
   error: "shadow shadow-error/50",
   transparent: "",
+  light: "",
 };
 
 export const HoverBackgroundColor: Record<NormalColors, string> = {
@@ -52,6 +57,7 @@ export const HoverBackgroundColor: Record<NormalColors, string> = {
   warning: "hover:bg-warning-hover",
   error: "hover:bg-error-hover",
   transparent: "",
+  light: "",
 };
 
 export const HoverBorderColor: Record<NormalColors, string> = {
@@ -70,6 +76,7 @@ export const HoverTextColorOnBorderColor: Record<NormalColors, string> = {
   warning: "hover:text-warning-hover",
   error: "hover:text-error-hover",
   transparent: "text-black",
+  light: "",
 };
 
 export const HoverShadowColor: Record<NormalColors, string> = {
@@ -79,6 +86,7 @@ export const HoverShadowColor: Record<NormalColors, string> = {
   warning: "hover:shadow-warning-hover/50",
   error: "hover:shadow-error-hover/50",
   transparent: "",
+  light: "",
 };
 
 export const TextColor: Record<TextColors, string> = {
@@ -88,4 +96,5 @@ export const TextColor: Record<TextColors, string> = {
   warning: "text-warning",
   error: "text-error",
   default: "",
+  light: "",
 };

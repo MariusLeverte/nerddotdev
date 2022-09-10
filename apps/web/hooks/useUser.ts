@@ -3,6 +3,7 @@ import { groq } from "next-sanity";
 import { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../libs/firebase/initFirebase";
+import { userWithProjectsByIdQuery } from "../libs/sanity/queries";
 import { User } from "../types/schema";
 import useSanityData from "./useSanityData";
 
@@ -19,7 +20,7 @@ const useUser = () => {
     error: sanityError,
   } = useSanityData<User>(
     {
-      query: groq`*[_type == "user" && _id == $id][0]`,
+      query: userWithProjectsByIdQuery,
       params: { id: user?.uid },
     },
     false,
@@ -40,6 +41,7 @@ const useUser = () => {
     if (!data) return;
 
     setCurrentUser({
+      ...data,
       id: user?.uid,
       slug: data?.slug?.current,
       name: data?.name,
@@ -50,6 +52,7 @@ const useUser = () => {
     user: currentUser,
     loading: firebaseLoading || sanityLoading,
     error: firebaseError || sanityError,
+    refetch: fetchData,
   };
 };
 

@@ -1,11 +1,11 @@
-import { Button, Input, Modal, Text } from "@nextui-org/react";
+import { Modal } from "@nextui-org/react";
 import { groq } from "next-sanity";
 import { useCallback, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { Button, Input, Select, Text } from "ui";
 import useSanityData from "../../hooks/useSanityData";
 import { auth } from "../../libs/firebase/initFirebase";
 import { SkillCategory } from "../../types/schema";
-import Select from "../NextUI/Select";
 
 interface AddSkillModalProps {
   visible: boolean;
@@ -13,6 +13,8 @@ interface AddSkillModalProps {
   onCallback?: () => void;
 }
 
+// TODO: Create own Modal component
+// TODO: Create new Modla to create skillCategory
 const AddSkillModal = ({
   visible,
   onClose,
@@ -65,13 +67,12 @@ const AddSkillModal = ({
       width="600px"
     >
       <Modal.Header>
-        <Text size={26} weight="bold">
+        <Text as="h2" weight="bold" className="text-2xl">
           Legg til ny ferdighet
         </Text>
       </Modal.Header>
       <Modal.Body css={{ padding: "$10" }}>
         <Input
-          clearable
           label="Ferdighet"
           value={skill}
           onChange={({ target: { value } }) => setSkill(value)}
@@ -80,14 +81,17 @@ const AddSkillModal = ({
           name="category"
           label="Kategori"
           value={category}
-          options={data?.map((c) => c.name)}
           onChange={({ target: { value } }) => setCategory(value)}
-        />
+        >
+          {data?.map((c) => (
+            <option key={c.name} value={c.name}>
+              {c.name}
+            </option>
+          ))}
+        </Select>
       </Modal.Body>
       <Modal.Footer>
         <Button
-          auto
-          flat
           color="success"
           onClick={handleCreateSkill}
           disabled={!formIsValid || publishing}

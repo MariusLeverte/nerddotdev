@@ -4,6 +4,7 @@ export type NormalColors =
   | "success"
   | "warning"
   | "error"
-  | "transparent";
+  | "transparent"
+  | "light";
 
 export type TextColors = "default" | Exclude<NormalColors, "transparent">;

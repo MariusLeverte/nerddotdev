@@ -1,4 +1,3 @@
-import { Button, Spacer } from "@nextui-org/react";
 import { PortableText } from "@portabletext/react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { groq } from "next-sanity";
@@ -8,35 +7,20 @@ import Table from "../../components/Skills/Table";
 import { getClient } from "../../libs/sanity/sanity.server";
 import { User, UserWithProjects } from "../../types/sanity";
 import { getArraySkills } from "../../utils/skills";
-import { userWithProjectsQuery } from "../../libs/sanity/queries";
-import { RiEdit2Line } from "react-icons/ri";
-import { useState } from "react";
-import useEditUserProfile from "../../hooks/useEditUserProfile";
-import UserRepos from "../../components/Grids/UserRepos";
+import { userWithProjectsBySlugQuery } from "../../libs/sanity/queries";
 import { revalidateMinutes } from "../../utils/revalidate";
-import dynamic from "next/dynamic";
-import { useFirebaseUser } from "../../libs/firebase/FirebaseAuthProvider";
-import { Container, Grid, Text } from "ui";
-const EditUserModal = dynamic(
-  () => import("../../components/Modals/EditUserModal")
-);
+import { Container, Text } from "ui";
 
 interface UserProps {
   user: UserWithProjects;
 }
 
 const User = ({ user }: UserProps) => {
-  const [visible, setVisible] = useState(false);
-  const { user: firebaseUser } = useFirebaseUser();
-  const { merged } = useEditUserProfile(user);
-
   if (!user) {
     return null;
   }
 
-  const data = merged || user;
-
-  const isCurrentUser = firebaseUser?.uid === user?._id;
+  const data = user;
 
   return (
     <div className="my-20 space-y-10 lg:space-y-20">
@@ -87,48 +71,6 @@ const User = ({ user }: UserProps) => {
           </Container>
         </Container>
       )}
-
-      {/* 
-      
-      {data.repos && (
-        <>
-          <Spacer y={5} />
-          <Container md as="section">
-            <UserRepos repos={data.repos} />
-          </Container>
-        </>
-      )}
-      <Spacer y={10} />
-      {isCurrentUser && (
-        <>
-          <Container
-            display="flex"
-            justify="center"
-            css={{
-              bottom: 0,
-              position: "fixed",
-              left: 0,
-              right: 0,
-              zIndex: 9999,
-            }}
-          >
-            <Button
-              rounded
-              bordered
-              color="gradient"
-              onClick={() => setVisible(true)}
-            >
-              Rediger <RiEdit2Line />
-            </Button>
-            <Spacer y={3} />
-          </Container>
-          <EditUserModal
-            visible={visible}
-            onClose={() => setVisible(false)}
-            id={user._id}
-          />
-        </>
-      )} */}
     </div>
   );
 };
@@ -138,8 +80,8 @@ export const getStaticProps: GetStaticProps = async ({
   preview = false,
 }) => {
   const user: UserWithProjects = await getClient(preview).fetch(
-    userWithProjectsQuery,
-    { user: params?.user }
+    userWithProjectsBySlugQuery,
+    { slug: params?.user }
   );
 
   if (!user) {

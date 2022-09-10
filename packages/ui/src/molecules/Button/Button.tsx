@@ -32,11 +32,14 @@ const Button = ({
   shadow,
   children,
   animated,
+  className,
   ...props
 }: ButtonProps) => {
   return (
     <button
+      {...props}
       className={clsx(
+        className,
         bordered
           ? [BorderColor[color], HoverBorderColor[color]]
           : [BackgroundColor[color], HoverBackgroundColor[color]],
@@ -48,7 +51,6 @@ const Button = ({
         shadow && [ShadowColor[color], HoverShadowColor[color]],
         animated && "transition-all"
       )}
-      {...props}
     >
       {children}
     </button>

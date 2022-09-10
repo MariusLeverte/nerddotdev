@@ -41,7 +41,7 @@ export type {
  *
  *
  */
-export interface User extends SanityDocument {
+export interface user extends SanityDocument {
   _type: "user";
 
   /**
@@ -126,7 +126,7 @@ export interface User extends SanityDocument {
    *
    *
    */
-  skills?: Array<SanityKeyedReference<Skill>>;
+  skills?: Array<SanityKeyedReference<skill>>;
 
   /**
    * Repos — `array`
@@ -179,7 +179,7 @@ export interface User extends SanityDocument {
  *
  *
  */
-export interface Skill extends SanityDocument {
+export interface skill extends SanityDocument {
   _type: "skill";
 
   /**
@@ -188,6 +188,13 @@ export interface Skill extends SanityDocument {
    *
    */
   name?: string;
+
+  /**
+   * slug — `slug`
+   *
+   *
+   */
+  slug?: { _type: "slug"; current: string };
 
   /**
    * Description — `text`
@@ -201,7 +208,14 @@ export interface Skill extends SanityDocument {
    *
    *
    */
-  category?: Array<SanityKeyedReference<SkillCategory>>;
+  category?: Array<SanityKeyedReference<skillCategory>>;
+
+  /**
+   * thread — `string`
+   *
+   *
+   */
+  thread?: string;
 }
 
 /**
@@ -209,7 +223,7 @@ export interface Skill extends SanityDocument {
  *
  *
  */
-export interface SkillCategory extends SanityDocument {
+export interface skillCategory extends SanityDocument {
   _type: "skillCategory";
 
   /**
@@ -232,7 +246,7 @@ export interface SkillCategory extends SanityDocument {
  *
  *
  */
-export interface Project extends SanityDocument {
+export interface project extends SanityDocument {
   _type: "project";
 
   /**
@@ -274,7 +288,7 @@ export interface Project extends SanityDocument {
    *
    *
    */
-  previewColor?: ColorPicker;
+  previewColor?: colorPicker;
 
   /**
    * about — `array`
@@ -296,14 +310,14 @@ export interface Project extends SanityDocument {
        *
        *
        */
-      role?: SanityReference<ProjectRole>;
+      role?: SanityReference<projectRole>;
 
       /**
        * user — `reference`
        *
        *
        */
-      user?: SanityReference<User>;
+      user?: SanityReference<user>;
     }>
   >;
 }
@@ -313,7 +327,7 @@ export interface Project extends SanityDocument {
  *
  *
  */
-export interface ProjectRole extends SanityDocument {
+export interface projectRole extends SanityDocument {
   _type: "projectRole";
 
   /**
@@ -324,11 +338,62 @@ export interface ProjectRole extends SanityDocument {
   name?: string;
 }
 
-export type Documents = User | Skill | SkillCategory | Project | ProjectRole;
+/**
+ * page
+ *
+ *
+ */
+export interface page extends SanityDocument {
+  _type: "page";
+
+  /**
+   * content — `array`
+   *
+   *
+   */
+  content?: Array<
+    SanityKeyed<{
+      _type: "banner";
+      /**
+       * title — `string`
+       *
+       *
+       */
+      title?: string;
+
+      /**
+       * text — `text`
+       *
+       *
+       */
+      text?: string;
+
+      /**
+       * image — `image`
+       *
+       *
+       */
+      image?: {
+        _type: "image";
+        asset: SanityReference<SanityImageAsset>;
+        crop?: SanityImageCrop;
+        hotspot?: SanityImageHotspot;
+      };
+    }>
+  >;
+}
+
+export type Documents =
+  | user
+  | skill
+  | skillCategory
+  | project
+  | projectRole
+  | page;
 
 /**
  * This interface is a stub. It was referenced in your sanity schema but
  * the definition was not actually found. Future versions of
  * sanity-codegen will let you type this explicity.
  */
-type ColorPicker = any;
+type colorPicker = any;
