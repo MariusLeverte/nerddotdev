@@ -7,6 +7,7 @@ import Star from "../../components/Lottie/Star";
 import UserInviteCodeCard from "../../components/Cards/UserInviteCodeCard";
 import { REFERRAL_URL } from "../../constants";
 import QRCode from "react-qr-code";
+import { MobileOnlyView } from "react-device-detect";
 
 const Invite = () => {
   const { user, referrals } = useFirebaseUser();
@@ -39,6 +40,20 @@ const Invite = () => {
       setCode(code);
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  const handleShare = () => {
+    if (navigator.share) {
+      navigator
+        .share({
+          title: "Del Nerd.dev kode",
+          url: referralUrl,
+        })
+        .then(() => {
+          console.log("Thanks for sharing!");
+        })
+        .catch(console.error);
     }
   };
 
@@ -101,6 +116,11 @@ const Invite = () => {
                     <span className="text-sm text-gray-700 dark:text-gray-200">
                       {referralUrl}
                     </span>
+                    <MobileOnlyView>
+                      <div>
+                        <Button onClick={handleShare}>Del</Button>
+                      </div>
+                    </MobileOnlyView>
                   </div>
                 </div>
               )}
