@@ -15,7 +15,7 @@ interface UserProps {
   user: UserWithProjects;
 }
 
-const User = ({ user }: UserProps) => {
+const UserPage = ({ user }: UserProps) => {
   if (!user) {
     return null;
   }
@@ -106,4 +106,4 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export default User;
+export default UserPage;

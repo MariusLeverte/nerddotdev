@@ -22,13 +22,6 @@ const Login = () => {
     }
   }, [signInWithGithub, user, router]);
 
-  // useEffect(() => {
-  //   if (githubLoading) return;
-  //   if (!githubUser) return;
-
-  //   router.push(USER_REDIRECT_URL);
-  // }, [githubLoading, githubUser, router]);
-
   return (
     <>
       <Meta noIndex />

@@ -1,9 +1,29 @@
-import { User } from "firebase/auth";
-import { collection, doc, getDoc, query, where } from "firebase/firestore";
+import { onAuthStateChanged, User, onIdTokenChanged } from "firebase/auth";
+import { collection, query, where } from "firebase/firestore";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionDataOnce } from "./hooks";
 import { auth, firestore } from "./initFirebase";
+
+const dev = process.env.NODE_ENV !== "production";
+
+const server = dev ? "http://localhost:3000" : "https://nerd.dev";
+
+onAuthStateChanged(auth, (user) => {
+  if (user) return;
+  fetch(server + "/api/auth/check");
+});
+
+onIdTokenChanged(auth, (user) => {
+  if (!user) return;
+  user.getIdToken().then((token) =>
+    fetch(server + "/api/auth/login", {
+      headers: {
+        Authorization: `bearer ${token}`,
+      },
+    })
+  );
+});
 
 type Metadata = { code?: string; thread?: string } | null;
 type CountProviderProps = { children: React.ReactNode };
