@@ -13,6 +13,7 @@ import { toSlate } from "../../components/Slate/utils";
 
 import { useRouter } from "next/router";
 import { generateKey } from "../../utils/key";
+import { initialValue } from "../../components/Slate/initialValue";
 
 const Edit = () => {
   const router = useRouter();
@@ -105,7 +106,7 @@ const Edit = () => {
         <div className="mb-4">
           <Label text="Om deg" />
           <SlateEditor
-            initialValue={about ? toSlate(about) : user.about}
+            initialValue={about ? toSlate(about) : user.about ?? initialValue}
             onChange={(value) => setValue("about", value)}
           />
         </div>
