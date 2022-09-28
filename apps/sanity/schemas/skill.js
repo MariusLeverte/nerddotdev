@@ -9,6 +9,13 @@ export default {
       type: "string",
     },
     {
+      name: "slug",
+      type: "slug",
+      options: {
+        source: "name",
+      },
+    },
+    {
       name: "description",
       title: "Description",
       type: "text",
@@ -18,6 +25,10 @@ export default {
       title: "Category",
       type: "array",
       of: [{ type: "reference", to: { type: "skillCategory" } }],
+    },
+    {
+      name: "thread",
+      type: "string",
     },
   ],
 };

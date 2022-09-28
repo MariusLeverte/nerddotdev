@@ -9,6 +9,8 @@ import skillCategory from "./skill-category";
 import project from "./project";
 import projectRole from "./project-role";
 import page from "./page";
+import share from "./share";
+import shareCategory from "./share-category";
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -23,5 +25,7 @@ export default createSchema({
     project,
     projectRole,
     page,
+    share,
+    shareCategory,
   ]),
 });

@@ -8,5 +8,11 @@ module.exports = withTM({
   typescript: {
     ignoreBuildErrors: true,
   },
-  images: { domains: ["cdn.sanity.io", "avatars.githubusercontent.com"] },
+  images: {
+    domains: [
+      "cdn.sanity.io",
+      "avatars.githubusercontent.com",
+      "p16-sign-va.tiktokcdn.com",
+    ],
+  },
 });

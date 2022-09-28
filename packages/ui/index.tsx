@@ -5,10 +5,11 @@ import Container from "./src/atoms/Container/Container";
 import Label from "./src/atoms/Label/Label";
 export { Grid, Text, SpaceBetween, Container, Label };
 
-import Button from "./src/molecules/Button/Button";
+import Button from "./src/molecules/Button";
 import Input from "./src/molecules/Input/Input";
 import Select from "./src/molecules/Select/Select";
-export { Button, Input, Select };
+import Card from "./src/molecules/Card";
+export { Button, Input, Select, Card };
 
 import Collapse from "./src/organisms/Collapse/Collapse";
 export { Collapse };
