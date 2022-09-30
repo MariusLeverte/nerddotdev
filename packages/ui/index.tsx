@@ -3,7 +3,8 @@ import Text from "./src/atoms/Text/Text";
 import SpaceBetween from "./src/atoms/SpaceBetween/SpaceBetween";
 import Container from "./src/atoms/Container/Container";
 import Label from "./src/atoms/Label/Label";
-export { Grid, Text, SpaceBetween, Container, Label };
+import Tag from "./src/atoms/Tag";
+export { Grid, Text, SpaceBetween, Container, Label, Tag };
 
 import Button from "./src/molecules/Button";
 import Input from "./src/molecules/Input/Input";

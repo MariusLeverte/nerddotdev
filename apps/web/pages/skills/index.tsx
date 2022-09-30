@@ -4,29 +4,49 @@ import { getUserSSR } from "../../libs/firebase/getUserSSR";
 import { getClient } from "../../libs/sanity/sanity.server";
 import { allSkillsWithUser } from "../../libs/sanity/queries";
 import { useFirebaseUser } from "../../libs/firebase/FirebaseAuthProvider";
-import { Container, Text } from "ui";
-import { Skill } from "../../types/schema";
-import SkillCard from "../../components/Skills/Card";
+import { Container, Tag, Text } from "ui";
+import Link from "next/link";
+import { isNotEmptyArray } from "@utils/array";
+import { FiChevronRight } from "react-icons/fi";
+import { SkillWithUser } from "@types/sanity/response";
 
 interface Props {
-  skills: Skill[];
+  skills: SkillWithUser[];
 }
 
 const SkillsPage = ({ skills }: Props) => {
   const { user } = useFirebaseUser();
 
   return (
-    <Container>
-      <Text as="h2" className="text-2xl">
+    <Container width="xs" className="my-20">
+      <Text as="h2" className="text-2xl lg:text-4xl" weight="bold">
         Alle ferdigheter
       </Text>
-      <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-        <div className="grid gap-8 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
-          {skills.map((skill) => (
-            <SkillCard key={skill._id} skill={skill} />
-          ))}
-        </div>
-      </div>
+      <ul className="divide-y divide-dashed mt-8">
+        {skills.map((skill) => (
+          <li key={skill._id} className="bg-white px-4 py-2 hover:bg-gray-50">
+            <Link href={`/skills/${skill.slug?.current}`}>
+              <a className="flex items-center justify-between">
+                <div>
+                  <div>
+                    <Text as="span" className="text-sm mr-4">
+                      {skill?.category && isNotEmptyArray(skill.category)
+                        ? skill.category.map((c) => c.name).join(", ")
+                        : null}
+                    </Text>
+                    {skill.connectedUser && <Tag text="Pro" color="success" />}
+                  </div>
+
+                  <Text weight="semibold" className="text-xl lg:text-2xl">
+                    {skill.name}
+                  </Text>
+                </div>
+                <FiChevronRight />
+              </a>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </Container>
   );
 };

@@ -34,7 +34,7 @@ export const userById = groq`*[_type == "user" && _id == $user][0]`;
 
 export const slugInUse = groq`*[slug.current == $slug][0] { _id }`;
 
-export const allSkillsWithUser = groq`*[_type == "skill"] {
+export const allSkillsWithUser = groq`*[_type == "skill"] | order(name asc) {
     ...,
     category[]->,
     "connectedUser": defined(*[_type == "user" && _id == $userId && references(^._id)][0])
