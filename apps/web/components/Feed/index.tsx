@@ -1,21 +1,45 @@
+import { FeedPost } from "@components/Feed/FeedPost";
+import { PortableText } from "@portabletext/react";
 import { FeedShare } from "@types/sanity/response";
-import TikTok from "./TikTok";
+import { Text } from "ui";
+import { OpenGraph } from "./OpenGraph";
 
 interface Props {
   item: FeedShare;
 }
 
 const Feed = ({ item }: Props) => {
-  const { _type } = item;
-
-  if (_type === "share") {
-    const type = item.content?.type;
-    if (type === "tiktok") {
-      return <TikTok share={item} />;
-    }
-  }
-
-  return null;
+  return (
+    <FeedPost
+      user={item.user}
+      createdAt={item._createdAt}
+      updatedAt={item._updatedAt}
+      id={item._id}
+    >
+      {item.content?.text && (
+        <PortableText
+          components={{
+            block: {
+              h2: ({ children }) => {
+                return (
+                  <Text as="h2" className="text-2xl lg:text-4xl mb-4">
+                    {children}
+                  </Text>
+                );
+              },
+              normal: ({ children }) => (
+                <Text className="mb-3">{children}</Text>
+              ),
+            },
+          }}
+          value={item.content.text}
+        />
+      )}
+      {item.content?.url && item.opengraph ? (
+        <OpenGraph url={item.content.url} data={item.opengraph} />
+      ) : null}
+    </FeedPost>
+  );
 };
 
 export default Feed;

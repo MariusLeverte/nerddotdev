@@ -1,4 +1,4 @@
-export default {
+const share = {
   name: "share",
   type: "document",
   fields: [
@@ -7,18 +7,13 @@ export default {
       type: "object",
       fields: [
         {
-          name: "url",
-          type: "url",
+          name: "text",
+          type: "array",
+          of: [{ type: "block" }],
         },
         {
-          name: "type",
-          type: "string",
-          options: {
-            list: [
-              { title: "Article", value: "article" },
-              { title: "TikTok", value: "tiktok" },
-            ],
-          },
+          name: "url",
+          type: "url",
         },
       ],
     },
@@ -46,5 +41,17 @@ export default {
       name: "data",
       type: "text",
     },
+    {
+      name: "opengraph",
+      type: "object",
+      fields: [
+        { name: "title", type: "string" },
+        { name: "description", type: "text" },
+        { name: "image", type: "string" },
+        { name: "url", type: "string" },
+      ],
+    },
   ],
 };
+
+export default share;

@@ -399,18 +399,18 @@ export interface Share extends SanityDocument {
   content?: {
     _type: "content";
     /**
+     * text — `array`
+     *
+     *
+     */
+    text?: Array<SanityKeyed<SanityBlock>>;
+
+    /**
      * url — `url`
      *
      *
      */
     url?: string;
-
-    /**
-     * type — `string`
-     *
-     *
-     */
-    type?: "article" | "tiktok";
   };
 
   /**
@@ -433,6 +433,49 @@ export interface Share extends SanityDocument {
    *
    */
   user?: SanityReference<User>;
+
+  /**
+   * data — `text`
+   *
+   *
+   */
+  data?: string;
+
+  /**
+   * opengraph — `object`
+   *
+   *
+   */
+  opengraph?: {
+    _type: "opengraph";
+    /**
+     * title — `string`
+     *
+     *
+     */
+    title?: string;
+
+    /**
+     * description — `text`
+     *
+     *
+     */
+    description?: string;
+
+    /**
+     * image — `string`
+     *
+     *
+     */
+    image?: string;
+
+    /**
+     * url — `string`
+     *
+     *
+     */
+    url?: string;
+  };
 }
 
 /**

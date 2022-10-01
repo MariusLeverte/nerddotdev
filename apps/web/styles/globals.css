@@ -4,6 +4,6 @@
 
 @layer base {
   html {
-    @apply text-[#0b1e5b] bg-[#f7f8f2];
+    @apply text-[#0b1e5b] bg-[#F5F0ED];
   }
 }
