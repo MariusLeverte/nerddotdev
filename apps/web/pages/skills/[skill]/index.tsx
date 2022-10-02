@@ -18,7 +18,7 @@ const SkillPage = ({ data }: Props) => {
   return (
     <SkillLayout title={data.name} users={data.users}>
       {data.shares?.map((share) => (
-        <Feed item={share} />
+        <Feed item={share} key={share._id} />
       ))}
     </SkillLayout>
   );

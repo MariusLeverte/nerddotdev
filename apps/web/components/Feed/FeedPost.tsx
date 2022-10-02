@@ -1,10 +1,12 @@
-import { FeedUser } from "@types/sanity/response";
+import useUser from "@hooks/useUser";
+import { useFirebaseUser } from "@libs/firebase/FirebaseAuthProvider";
+import { FeedShare, FeedUser } from "@types/sanity/response";
 import { getTimeSince } from "@utils/date";
 import Image from "next/image";
 import Link from "next/link";
 import { SanityDocument } from "sanity-codegen";
-import { Text } from "ui";
-import { PostLike } from "./PostLike";
+import { Tag, Text } from "ui";
+import { PostReaction } from "./PostReaction";
 
 interface Props {
   children: React.ReactNode;
@@ -12,6 +14,8 @@ interface Props {
   createdAt: SanityDocument["_createdAt"];
   updatedAt?: SanityDocument["_updatedAt"];
   id: SanityDocument["_id"];
+  category: FeedShare["category"];
+  skill: FeedShare["skills"];
 }
 
 export const FeedPost = ({
@@ -20,9 +24,10 @@ export const FeedPost = ({
   updatedAt,
   children,
   id,
+  category = [],
 }: Props) => {
   return (
-    <div className="bg-white p-4 rounded-sm">
+    <div className="bg-white p-4 rounded-sm item">
       <div className="flex items-start gap-4">
         <Link href={`/${user.slug?.current || ""}`}>
           <a className="shrink-0">
@@ -48,7 +53,17 @@ export const FeedPost = ({
         </div>
       </div>
 
-      <div className="mt-4 space-y-4 flex-1">{children}</div>
+      <div className="mt-4 space-y-4 flex-1">
+        <div>
+          {category?.map((c) => (
+            <Tag text={c.name || ""} key={c._id} />
+          ))}
+        </div>
+        <div>{children}</div>
+      </div>
+      <div className="mt-4">
+        <PostReaction id={id} />
+      </div>
     </div>
   );
 };

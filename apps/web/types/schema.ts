@@ -129,6 +129,13 @@ export interface User extends SanityDocument {
   skills?: Array<SanityKeyedReference<Skill>>;
 
   /**
+   * noob — `array`
+   *
+   *
+   */
+  noob?: Array<SanityKeyedReference<Skill>>;
+
+  /**
    * Repos — `array`
    *
    *

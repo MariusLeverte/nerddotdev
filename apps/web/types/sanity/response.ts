@@ -2,7 +2,7 @@ import { Share, Skill, SkillCategory, User } from "@types/schema";
 
 export type FeedUser = Pick<User, "name" | "photo" | "slug">;
 
-export type FeedShare = Share & {
+export type FeedShare = Omit<Share, "category" | "skills"> & {
   user: FeedUser;
   skills: Skill[];
   category: SkillCategory[];

@@ -47,10 +47,5 @@ export const skillFeed = groq`*[_type == "skill" && slug.current == $slug][0] {
       user->{ name, photo, slug },
       skills[]->,
       category[]->,
-    },
-    "users": *[_type == "user" && references(^._id)] {
-      slug,
-      name,
-      photo
     }
   }`;

@@ -15,6 +15,8 @@ const Feed = ({ item }: Props) => {
       createdAt={item._createdAt}
       updatedAt={item._updatedAt}
       id={item._id}
+      category={item.category}
+      skill={item.skills}
     >
       {item.content?.text && (
         <PortableText
