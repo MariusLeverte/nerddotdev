@@ -1,20 +1,9 @@
-import { GetStaticProps } from "next";
-import { Container, Grid, Text } from "ui";
-import Meta from "../components/SEO/Meta";
-import { pageWithContent } from "../libs/sanity/queries";
-import { getClient } from "../libs/sanity/sanity.server";
-import { getCanoniical } from "../utils/canonical";
-import Spline from "@splinetool/react-spline";
-import { useRef } from "react";
-import { BrowserView, MobileView } from "react-device-detect";
+import { Container } from "ui";
 
-const Home = ({ data }: { data: any }) => {
-  const [banner] = data.content;
-  const spline = useRef<any>();
-
+const Home = () => {
   return (
     <>
-      <Meta
+      {/* <Meta
         title="Kanskje Norges kuleste utvikler miljø - Nerd.dev"
         description="Webutvikler miljø for de beste utviklerne i Norge av utviklere"
         canonical={getCanoniical()}
@@ -22,61 +11,10 @@ const Home = ({ data }: { data: any }) => {
           current: "nb_NO",
         }}
         keywords="webutvikler,frontend,miljø for utviklere"
-      />
-      <div className="h-screen absolute top-0 w-full pt-28 md:pt-0 bg-[#ffe4c4]">
-        <Container width="xl" className="h-full flex items-center">
-          <Grid className="flex-1 w-full h-full">
-            <Grid.Column className="col-span-12 lg:col-span-6 flex flex-col justify-center">
-              <Text as="h1" weight="bold" className="text-2xl lg:text-6xl">
-                {banner.title}
-              </Text>
-              {banner.text && (
-                <>
-                  <Text
-                    as="h2"
-                    weight="normal"
-                    className="text-lg lg:text-2xl mt-4"
-                  >
-                    {banner.text}
-                  </Text>
-                  <Text as="span" className="mt-6 text-sm italic">
-                    Invitasjoner slippes fortløpende
-                  </Text>
-                </>
-              )}
-            </Grid.Column>
-            <Grid.Column className="col-span-12 lg:col-span-6 overflow-visible relative">
-              <Spline
-                scene="https://prod.spline.design/FK8UjuMdGShMnScz/scene.splinecode"
-                onLoad={(splineApp) => (spline.current = splineApp)}
-              />
-              <div className="absolute bottom-6 text-center left-0 right-0 opacity-50">
-                <BrowserView>
-                  <Text className="text-sm">Hold musepekeren nede</Text>
-                </BrowserView>
-                <MobileView>
-                  <Text className="text-sm">To fingre for å se rundt</Text>
-                </MobileView>
-              </div>
-            </Grid.Column>
-          </Grid>
-        </Container>
-      </div>
+      /> */}
+      <Container className="bg-slate-900 min-h-screen"></Container>
     </>
   );
-};
-
-export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
-  const data = await getClient(preview).fetch(pageWithContent, {
-    page: "0381cc1d-e982-485a-b965-59204bae7cdd",
-  });
-
-  return {
-    props: {
-      data,
-    },
-    revalidate: 3600,
-  };
 };
 
 export default Home;
