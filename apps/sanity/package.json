@@ -7,7 +7,7 @@
   "author": "Marius Djerv <mariusdjerv@gmail.com>",
   "license": "UNLICENSED",
   "scripts": {
-    "dev": "sanity start",
+    "start": "sanity start",
     "prebuild": "codegen",
     "build": "sanity build",
     "codegen": "sanity-codegen"
