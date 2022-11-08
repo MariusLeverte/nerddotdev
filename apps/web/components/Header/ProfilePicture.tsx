@@ -1,6 +1,6 @@
-import { Avatar } from "@nextui-org/react";
 import { useState } from "react";
-import { useFirebaseUser } from "../../libs/firebase/FirebaseAuthProvider";
+import { Avatar } from "@nextui-org/react";
+import { useFirebaseUser } from "@libs/firebase/FirebaseAuthProvider";
 
 const ProfilePicture = () => {
   const { user, loading } = useFirebaseUser();

@@ -7,6 +7,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        transparent: "transparent",
         primary: { DEFAULT: colors.blue[600], hover: colors.blue[800] },
         secondary: { DEFAULT: colors.purple[600], hover: colors.purple[800] },
         success: { DEFAULT: colors.green[600], hover: colors.green[800] },
