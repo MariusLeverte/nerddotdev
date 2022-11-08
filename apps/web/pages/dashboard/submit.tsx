@@ -1,6 +1,7 @@
 import CodeEditor from "@components/CodeEditor";
 import { auth, firestore } from "@libs/firebase/initFirebase";
 import { addDoc, collection } from "firebase/firestore";
+import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Container } from "ui";
@@ -9,6 +10,7 @@ import { defaultEditorValue } from "../../constants";
 const Submit = () => {
   const [user] = useAuthState(auth);
   const [submitting, setSubmitting] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = useCallback(
     async (value: string) => {
@@ -20,13 +22,15 @@ const Submit = () => {
           code: value,
           user: user?.uid,
         });
+
+        router.push("/dashboard");
       } catch (e) {
         console.error(e);
       } finally {
         setSubmitting(false);
       }
     },
-    [user]
+    [user, router]
   );
 
   return (
