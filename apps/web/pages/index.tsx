@@ -1,6 +1,7 @@
 import { Container, Grid, Text } from "ui";
 import { HeroImage } from "@components/Banners/HeroImage/HeroImage";
 import { RatingCard, Score } from "@components/Cards/RatingCard";
+import { Blue } from "@components/Cards/Blue";
 
 const mock_ratings = [
   {
@@ -20,6 +21,25 @@ const mock_ratings = [
     review:
       "Maecenas convallis non sapien in commodo. Nulla semper pulvinar luctus. Proin luctus.",
     score: 1 as Score,
+  },
+];
+
+const howToStepsPitch = [
+  {
+    header: "Target youur audience effectively",
+    body: "Using basic skills you can improve your business stuff with Around Using basic skills ",
+  },
+  {
+    header: "Build deshboard in minutes",
+    body: "Using basic skills you can improve your business stuff with Around Using basic skills ",
+  },
+  {
+    header: "Easily download your tables and data",
+    body: "Using basic skills you can improve your business stuff with Around Using basic skills ",
+  },
+  {
+    header: "Access to dashboard from all devices",
+    body: "Using basic skills you can improve your business stuff with Around Using basic skills ",
   },
 ];
 
@@ -53,7 +73,7 @@ const Home = () => {
       </section>
       <Container as="section" className="text-center mb-32 lg:mb-64">
         <Text
-          className="text-2xl lg:text-[72px] mb-10 lg:mb-12"
+          className="text-2xl lg:text-[48px] mb-10 lg:mb-12"
           weight="extrabold"
         >
           Customers have consistently <br />
@@ -61,19 +81,70 @@ const Home = () => {
         </Text>
         <Grid>
           {mock_ratings.map(({ score, review, user }) => (
-            <Grid.Column className="col-span-6 lg:col-span-4">
+            <Grid.Column
+              className="col-span-6 lg:col-span-4"
+              key={score + user}
+            >
               <RatingCard score={score} review={review} user={user} />
             </Grid.Column>
           ))}
         </Grid>
       </Container>
-      <Container as="section" className="text-center">
-        <Text className="text-2xl lg:text-[72px]" weight="extrabold">
-          How Does It Work?
-        </Text>
-        <Text className="text-sm lg:text-2xl">
-          By uploading your snippet to get it refactored
-        </Text>
+      <Container as="section" className="mb-32 lg:mb-64">
+        <div className="text-center">
+          <Text className="text-2xl lg:text-[48px]" weight="extrabold">
+            How Does It Work?
+          </Text>
+          <Text className="text-sm lg:text-2xl mb-10 lg:mb-12">
+            By uploading your snippet to get it refactored
+          </Text>
+        </div>
+
+        <Grid>
+          {howToStepsPitch.map(({ header, body }, index) => (
+            <Grid.Column className="col-span-3" key={"howToStepsPitch" + index}>
+              <Blue>
+                <div className="flex mb-2">
+                  <Text weight="bold" className="pr-2">
+                    {index + 1}.
+                  </Text>
+                  <Text weight="bold">{header}</Text>
+                </div>
+                <Text className="text-white">{body}</Text>
+              </Blue>
+            </Grid.Column>
+          ))}
+        </Grid>
+      </Container>
+
+      <Container as="section" className="mb-32 lg:mb-64">
+        <Grid>
+          <Grid.Column className="col-span-6 flex items-center">
+            <Grid className="flex-1">
+              {[...new Array(3)].map((__, index) => (
+                <Grid.Column
+                  className={
+                    index !== 1
+                      ? "col-span-11 col-start-1"
+                      : "col-span-11 col-start-2"
+                  }
+                >
+                  <Blue>helo</Blue>
+                </Grid.Column>
+              ))}
+            </Grid>
+          </Grid.Column>
+          <Grid.Column className="col-span-6">
+            <Text className="text-2xl lg:text-[48px]" weight="extrabold">
+              The robust and highly customizable data analysis tool
+            </Text>
+            <Text className="text-sm lg:text-2xl">
+              Using basic skills you can improve your business stuff with Around
+              Using basic skills you can improve your business stuff with Around
+              Using basic skills
+            </Text>
+          </Grid.Column>
+        </Grid>
       </Container>
     </>
   );

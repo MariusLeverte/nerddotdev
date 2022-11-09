@@ -12,8 +12,11 @@ export const RatingCard = ({ score, review, user }: RatingCardProps) => {
   return (
     <div className="flex flex-col items-center">
       <div className="flex space-x-2 mb-4 lg:mb-6">
-        {[...new Array(score)].map(() => (
-          <AiFillStar className="text-amber-300 text-2xl lg:text-[50px]" />
+        {[...new Array(score)].map((__, index) => (
+          <AiFillStar
+            className="text-amber-300 text-2xl lg:text-[50px]"
+            key={"starrating" + index}
+          />
         ))}
       </div>
       <Text className="text-lg lg:text-2xl mb-4 lg:mb-6">{review}</Text>

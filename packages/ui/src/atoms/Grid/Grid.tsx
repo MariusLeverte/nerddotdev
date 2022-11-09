@@ -18,7 +18,7 @@ const Grid = ({ children, className }: GridRowProps) => {
   return (
     <div
       className={clsx(
-        "grid gap-4 grid-cols-2 md:grid-cols-6 lg:grid-cols-12",
+        "grid gap-4 lg:gap-10 grid-cols-2 md:grid-cols-6 lg:grid-cols-12",
         className
       )}
     >
