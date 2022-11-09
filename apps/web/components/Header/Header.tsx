@@ -57,7 +57,7 @@ const Header = () => {
     <header className="bg-slate-900">
       <Container
         width="xl"
-        className="pt-10 mb-20 h-20 flex justify-between items-center z-10 relative"
+        className="pt-10 mb-10 lg:mb-20 h-20 flex justify-between items-center z-10 relative"
       >
         <Link href="/" passHref>
           <a className="text-white max-w-[50px] overflow-visible">

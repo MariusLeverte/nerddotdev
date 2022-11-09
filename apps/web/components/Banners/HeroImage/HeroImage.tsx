@@ -9,18 +9,18 @@ interface LandingHeroImageProps {
   bottomSectionColor?: string;
 }
 
-export const LandingHeroImage = ({
+export const HeroImage = ({
   topSectionColor,
   bottomSectionColor = "bg-transparent",
 }: LandingHeroImageProps) => {
   return (
-    <section>
+    <div>
       <div className={clsx(topSectionColor)}>
         <Container className="h-[300px] lg:h-[780px] relative -mt-20 lg:-mt-52 translate-y-20 lg:translate-y-52 shadow-slate-900">
-          <Image src={imageos} alt="test" layout="fill" objectFit="fill" />
+          <Image src={imageos} alt="test" layout="fill" objectFit="contain" />
         </Container>
       </div>
       <div className={clsx(bottomSectionColor, "h-32 lg:h-64")} />
-    </section>
+    </div>
   );
 };
