@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { AiOutlineMenuFold } from "react-icons/ai";
 import { Text, Container, Button } from "ui";
 import ProfilePicture from "./ProfilePicture";
 import { useFirebaseUser } from "@libs/firebase/FirebaseAuthProvider";
@@ -28,7 +29,7 @@ const Navbar = () => {
   const router = useRouter();
 
   return (
-    <nav className="text-white space-x-6">
+    <nav className="hidden md:block text-white space-x-6 ">
       {navbarItems.map((navbarItem) => {
         const isActive = router.asPath === navbarItem.link;
 
@@ -60,7 +61,7 @@ const Header = () => {
         className="pt-10 mb-10 lg:mb-20 h-20 flex justify-between items-center z-10 relative"
       >
         <Link href="/" passHref>
-          <a className="text-white max-w-[50px] overflow-visible">
+          <a className="text-white max-w-[70px] overflow-visible">
             <Text weight="bold" className="text-lg lg:text-4xl">
               Nerd
               <Text as="span" className="text-sm lg:text-2xl" weight="light">
@@ -74,12 +75,15 @@ const Header = () => {
         <Navbar />
         <div
           className={clsx(
-            "overflow-hidden transition-all",
-            !loading ? "w-[50px]" : "w-0"
+            "overflow-hidden transition-all hidden md:block",
+            !loading ? "w-[70px]" : "w-0"
           )}
         >
           {user ? <ProfilePicture /> : <Button>Login</Button>}
         </div>
+        <Button className="block md:hidden bg-transparent px-0">
+          <AiOutlineMenuFold size={30} />
+        </Button>
       </Container>
     </header>
   );

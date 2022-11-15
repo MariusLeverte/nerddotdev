@@ -46,15 +46,6 @@ const howToStepsPitch = [
 const Home = () => {
   return (
     <>
-      {/* <Meta
-        title="Kanskje Norges kuleste utvikler miljø - Nerd.dev"
-        description="Webutvikler miljø for de beste utviklerne i Norge av utviklere"
-        canonical={getCanoniical()}
-        locale={{
-          current: "nb_NO",
-        }}
-        keywords="webutvikler,frontend,miljø for utviklere"
-      /> */}
       <section className="mb-32 lg:mb-64">
         <div className="bg-slate-900 flex flex-col	justify-between">
           <Container className="text-center text-white mb-10 lg:mb-12">
