@@ -1,7 +1,8 @@
 import { Container, Grid, Text } from "ui";
-import { HeroImage } from "@components/Banners/HeroImage/HeroImage";
+import { HeroImage } from "@components/Banners/HeroImage";
 import { RatingCard, Score } from "@components/Cards/RatingCard";
 import { Blue } from "@components/Cards/Blue";
+import { RefactoredBadge } from "@components/Badges/RefactoredBadge";
 
 const mock_ratings = [
   {
@@ -116,11 +117,16 @@ const Home = () => {
                 <Grid.Column
                   className={
                     index !== 1
-                      ? "col-span-11 col-start-1"
-                      : "col-span-11 col-start-2"
+                      ? "col-span-2 md:col-span-4 lg:col-span-11 md:col-start-2 lg:col-start-1"
+                      : "col-span-2 md:col-span-4 lg:col-span-11 md:col-start-3 lg:col-start-2"
                   }
                 >
-                  <Blue>helo</Blue>
+                  <Blue>
+                    <div className="flex justify-between">
+                      <Text>Username here</Text>
+                      <RefactoredBadge added={0} removed={69} />
+                    </div>
+                  </Blue>
                 </Grid.Column>
               ))}
             </Grid>
