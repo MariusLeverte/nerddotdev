@@ -3,7 +3,9 @@ import admin from "@libs/firebase/initFirebase.server";
 import { Submission } from "@types/firebase";
 import { isNotEmptyArray } from "@utils/array";
 import { GetServerSideProps } from "next";
-import { Container } from "ui";
+import Link from "next/link";
+import { FiChevronRight } from "react-icons/fi";
+import { Container, Text } from "ui";
 
 interface Props {
   initialData: Submission[];
@@ -11,14 +13,24 @@ interface Props {
 
 const Dashboard = ({ initialData }: Props) => {
   return (
-    <section className="before:bg-slate-900 before:h-20 before:block">
-      <Container className="-mt-20">
+    <section className="bg-slate-900 min-h-screen">
+      <Container>
+        <Text className="text-sm lg:text-2xl text-white mb-8" weight="light">
+          Your submissions
+        </Text>
         {isNotEmptyArray(initialData) && (
           <div className="bg-white p-4 rounded-md shadow-md">
             <ul className="divide-y divide-solid">
               {initialData.map((code) => (
                 <li className="p-4 mx-6">
-                  <div className="-mx-8">Foo</div>
+                  <Link href={`/${code.id}`}>
+                    <a>
+                      <div className="-mx-8 flex justify-between items-center">
+                        <Text>{code?.title ?? "No title"}</Text>
+                        <FiChevronRight />
+                      </div>
+                    </a>
+                  </Link>
                 </li>
               ))}
             </ul>

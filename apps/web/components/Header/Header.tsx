@@ -35,11 +35,11 @@ const Navbar = () => {
 
         return (
           <Link href={navbarItem.link} passHref>
-            <a className="text-white">
+            <a>
               <Text
                 as="span"
-                className="text-sm lg:text-2xl"
-                weight={isActive ? "bold" : "light"}
+                className="text-sm lg:text-xl text-white"
+                weight={isActive ? "bold" : "thin"}
               >
                 {navbarItem.name}
               </Text>
@@ -79,7 +79,17 @@ const Header = () => {
             !loading ? "w-[70px]" : "w-0"
           )}
         >
-          {user ? <ProfilePicture /> : <Button>Login</Button>}
+          {user ? (
+            <ProfilePicture />
+          ) : (
+            <Link href="/login">
+              <a>
+                <Button className="bg-gradient-to-r from-violet-500 to-fuchsia-500">
+                  Login
+                </Button>
+              </a>
+            </Link>
+          )}
         </div>
         <Button className="block md:hidden bg-transparent px-0">
           <AiOutlineMenuFold size={30} />
